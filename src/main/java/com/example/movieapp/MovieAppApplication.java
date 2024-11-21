@@ -1,4 +1,4 @@
-package com.example.movierecommendation;
+package com.example.movieapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,13 +7,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class MovieAppApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MovieAppApplication.class.getResource("/com/example/movieapp/MovieApp.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Movie App");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

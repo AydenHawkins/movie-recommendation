@@ -1,4 +1,4 @@
-module com.example.movierecommendation {
+module com.example.movieapp {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -7,8 +7,9 @@ module com.example.movierecommendation {
     requires org.kordamp.bootstrapfx.core;
     requires java.net.http;
     requires com.google.gson;
+    requires java.desktop;
 
-    opens com.example.movierecommendation to javafx.fxml, com.google.gson;
-    exports com.example.movierecommendation;
+    opens com.example.movieapp to javafx.fxml, com.google.gson;
+    exports com.example.movieapp;
 
 }
