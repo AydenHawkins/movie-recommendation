@@ -4,8 +4,9 @@ import java.sql.SQLException;
 
 public class Database {
 
+    private final String url = "jdbc:sqlite:movieuserdata.db";
+
     public static void insert_liked_movie(int mov_id){
-        String url = "jdbc:sqlite:movieuserdata.db";
         String id = String.valueOf(mov_id);
         String sql = "INSERT INTO Liked_Movies VALUES(?)";
 
