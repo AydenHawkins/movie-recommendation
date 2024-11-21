@@ -4,14 +4,14 @@ import java.sql.SQLException;
 
 public class Database {
 
-    public static void insert_liked_movie(int id){
+    public static void insert_liked_movie(int mov_id){
         String url = "jdbc:sqlite:movieuserdata.db";
-
+        String id = String.valueOf(mov_id);
         String sql = "INSERT INTO Liked_Movies VALUES(?)";
 
         try(var conn = DriverManager.getConnection(url);
         var stmt = conn.prepareStatement(sql)){
-            stmt.setInt(1, id);
+            stmt.setString(1, id);
             stmt.execute();
         }catch(SQLException e){
             e.printStackTrace();
