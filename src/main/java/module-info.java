@@ -8,6 +8,7 @@ module com.example.movieapp {
     requires java.net.http;
     requires com.google.gson;
     requires java.desktop;
+    requires java.sql;
 
     opens com.example.movieapp to javafx.fxml, com.google.gson;
     exports com.example.movieapp;
