@@ -130,9 +130,9 @@ public class Database {
      *
      * @return ArrayList of all movieIDs
      */
-    public static ArrayList<String> getLikedMovies() {
+    public static ArrayList<Integer> getLikedMovies() {
         String sql = "SELECT * FROM Liked_Movies";
-        ArrayList<String> likedIDs = new ArrayList<>();
+        ArrayList<Integer> likedIDs = new ArrayList<>();
 
         try {
             // connect to database using url
@@ -143,10 +143,10 @@ public class Database {
             ResultSet queryResults = statement.executeQuery(sql);
             // iterate through ResultSet and add each id to ArrayList
             while (queryResults.next()) {
-                likedIDs.add(queryResults.getString("movie_id"));
+                likedIDs.add(Integer.parseInt(queryResults.getString("movie_id")));
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | NumberFormatException e) {
                 System.out.println("Database Error: " + e.getMessage());
             }
 
@@ -158,9 +158,9 @@ public class Database {
      *
      * @return ArrayList of all movieIDs
      */
-    public static ArrayList<String> getWatchedMovies() {
+    public static ArrayList<Integer> getWatchedMovies() {
         String sql = "SELECT * FROM Watched_Movies";
-        ArrayList<String> watchedIDs = new ArrayList<>();
+        ArrayList<Integer> watchedIDs = new ArrayList<>();
 
         try {
             // connect to database using url
@@ -171,10 +171,10 @@ public class Database {
             ResultSet queryResults = statement.executeQuery(sql);
             // iterate through ResultSet and add each id to ArrayList
             while (queryResults.next()) {
-                watchedIDs.add(queryResults.getString("movie_id"));
+                watchedIDs.add(Integer.parseInt(queryResults.getString("movie_id")));
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | NumberFormatException e) {
             System.out.println("Database Error: " + e.getMessage());
         }
 
@@ -186,9 +186,9 @@ public class Database {
      *
      * @return ArrayList of all movieIDs
      */
-    public static ArrayList<String> getToWatch() {
+    public static ArrayList<Integer> getToWatch() {
         String sql = "SELECT * FROM To_Watch";
-        ArrayList<String> toWatchIDs = new ArrayList<>();
+        ArrayList<Integer> toWatchIDs = new ArrayList<>();
 
         try {
             // connect to database using url
@@ -199,10 +199,10 @@ public class Database {
             ResultSet queryResults = statement.executeQuery(sql);
             // iterate through ResultSet and add each id to ArrayList
             while (queryResults.next()) {
-                toWatchIDs.add(queryResults.getString("movie_id"));
+                toWatchIDs.add(Integer.parseInt(queryResults.getString("movie_id")));
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | NumberFormatException e) {
             System.out.println("Database Error: " + e.getMessage());
         }
 
