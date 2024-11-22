@@ -9,7 +9,6 @@ module com.example.movieapp {
     requires com.google.gson;
     requires java.desktop;
     requires java.sql;
-    requires org.slf4j;
 
     opens com.example.movieapp to javafx.fxml, com.google.gson;
     exports com.example.movieapp;
