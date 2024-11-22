@@ -52,12 +52,12 @@ public class MovieService {
         // Deserialize response.
         MovieResponse movieResponse = gson.fromJson(response, MovieResponse.class);
 
+        List<Movie> movie;
         if (movieResponse != null) {
-            List<Movie> movie = movieResponse.getResults();
-            return movie.getFirst();
+            movie = movieResponse.getResults();
         } else {
-            List<Movie> movie = new ArrayList<>();
-            return movie.getFirst();
+            movie = new ArrayList<>();
         }
+        return movie.getFirst();
     }
 }

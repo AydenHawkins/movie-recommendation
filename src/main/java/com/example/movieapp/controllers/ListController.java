@@ -4,7 +4,6 @@ import com.example.movieapp.models.Movie;
 import com.example.movieapp.services.MovieService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -14,10 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ListController {
     @FXML
