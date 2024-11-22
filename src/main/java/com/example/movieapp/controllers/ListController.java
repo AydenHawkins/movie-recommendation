@@ -4,6 +4,8 @@ import com.example.movieapp.models.Movie;
 import com.example.movieapp.services.MovieService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -13,8 +15,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.movieapp.database.Database;
 
 public class ListController {
     @FXML
@@ -36,18 +41,12 @@ public class ListController {
         // Clear previous results
         resultsGrid.getChildren().clear();
 
-        ArrayList<Integer> movieIDs = new ArrayList<Integer>();
+        ArrayList<Integer> movieIDs = new ArrayList<>();
         // Get the movie data
         switch (database) {
-            case "Liked_Movies" -> {
-                movieIDs = database.getLikedMovies();
-            }
-            case "Watched_Movies" -> {
-                movieIDs = database.getWatchedMovies();
-            }
-            case "To_Watch" -> {
-                movieIDs = database.getToWatch();
-            }
+            case "Liked_Movies" -> movieIDs = Database.getLikedMovies();
+            case "Watched_Movies" -> movieIDs = Database.getWatchedMovies();
+            case "To_Watch" -> movieIDs = Database.getToWatch();
         }
         //must add api calls to create a list of movie objects
         List<Movie> movies = new ArrayList<>();
@@ -109,5 +108,49 @@ public class ListController {
                 row++;
             }
         }
+    }
+
+    private void showMovieDetailsPopup(Movie movie) {
+        // Create a new stage for the popup
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setTitle(movie.getTitle());
+
+        // Create a VBox for the movie details
+        VBox detailsPane = new VBox();
+        detailsPane.setAlignment(Pos.CENTER);
+        detailsPane.setSpacing(20);
+        detailsPane.setStyle("-fx-background-color: #ffffff; -fx-padding: 20;");
+
+        // Add the movie's poster
+        ImageView posterView = new ImageView(new Image("https://image.tmdb.org/t/p/w500" + movie.getPosterPath()));
+        posterView.setFitWidth(300);
+        posterView.setFitHeight(450);
+
+        // Add the movie's title
+        Text title = new Text(movie.getTitle());
+        title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+
+        // Add the movie's release date
+        Text releaseDate = new Text(movie.getFormattedReleaseDate());
+
+        // Add the movie's overview
+        Text overview = new Text(movie.getOverview());
+        overview.setWrappingWidth(400);
+        overview.setStyle("-fx-font-size: 16px;");
+
+        // Add a close button
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(event -> popupStage.close());
+
+        // Add all components to the detailsPane
+        detailsPane.getChildren().addAll(posterView, title, releaseDate, overview, closeButton);
+
+        // Create a new scene for the popup
+        Scene popupScene = new Scene(detailsPane, 500, 700);
+
+        // Set the scene and show the popup
+        popupStage.setScene(popupScene);
+        popupStage.show();
     }
 }

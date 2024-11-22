@@ -34,7 +34,7 @@ public class MovieService {
         String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
 
         // Send request.
-        String response = apiClient.sendRequest("/movie", encodedQuery, page);
+        String response = apiClient.sendRequest("movie/popular", encodedQuery, page);
 
         // Deserialize response.
         MovieResponse movieResponse = gson.fromJson(response, MovieResponse.class);
@@ -47,7 +47,7 @@ public class MovieService {
         String encodedQuery = URLEncoder.encode(movieID, StandardCharsets.UTF_8);
 
         // Send request.
-        String response = apiClient.sendRequest("/movie", encodedQuery, page);
+        String response = apiClient.sendRequest("movie/", encodedQuery, page);
 
         // Deserialize response.
         MovieResponse movieResponse = gson.fromJson(response, MovieResponse.class);
