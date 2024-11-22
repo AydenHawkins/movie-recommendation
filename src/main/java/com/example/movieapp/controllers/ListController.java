@@ -53,6 +53,10 @@ public class ListController {
             }
         }
         //must add api calls to create a list of movie objects
+        List<Movie> movies = new ArrayList<>();
+        for (int movieID : movieIDs){
+            movies.add(MovieService.getMovieByID(String.valueOf(movieID), 1));
+        }
 
         int row = 0;
         int col = 0;
