@@ -6,12 +6,18 @@ public class Database {
 
     private static final String url = "jdbc:sqlite:movieuserdata.db";
 
-    public static void insert_liked_movie(int mov_id){
-        String id = String.valueOf(mov_id);
+    /** Takes a movieID and inserts it into the database into table Liked_Movie
+     *
+     * @param movieID the ID for the movie
+     */
+    public static void insertLikedMovie(int movieID){
+        //api calls return movieID as an int so easier to cast within the method
+        String id = String.valueOf(movieID);
         String sql = "INSERT INTO Liked_Movies VALUES(?)";
 
         try(var conn = DriverManager.getConnection(url);
         var stmt = conn.prepareStatement(sql)){
+            //putting the movie ID into the ? parameter in the sql statement
             stmt.setString(1, id);
             stmt.execute();
         }catch(SQLException e){
@@ -19,12 +25,42 @@ public class Database {
         }
     }
 
-    public static void insert_watched_movie(){
+    /** Takes a movieID and inserts it into the database into table Watched_Movie
+     *
+     * @param movieID the ID for the movie
+     */
+    public static void insertWatchedMovie(int movieID){
+        //api calls return movieID as an int so easier to cast within the method
+        String id = String.valueOf(movieID);
+        String sql = "INSERT INTO Watched_Movies VALUES(?)";
 
+        try(var conn = DriverManager.getConnection(url);
+            var stmt = conn.prepareStatement(sql)){
+            //putting the movie ID into the ? parameter in the sql statement
+            stmt.setString(1, id);
+            stmt.execute();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void insert_watch_list(){
+    /** Takes a movieID and inserts it into the database into table To_Watch
+     *
+     * @param movieID the ID for the movie
+     */
+    public static void insertWatchList(int movieID){
+        //api calls return movieID as an int so easier to cast within the method
+        String id = String.valueOf(movieID);
+        String sql = "INSERT INTO To_Watch VALUES(?)";
 
+        try(var conn = DriverManager.getConnection(url);
+            var stmt = conn.prepareStatement(sql)){
+            //putting the movie ID into the ? parameter in the sql statement
+            stmt.setString(1, id);
+            stmt.execute();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void removeLikedMovie(int movieID) {
