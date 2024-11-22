@@ -5,6 +5,7 @@ import com.example.movieapp.services.MovieService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,6 +30,12 @@ public class ListController {
     private Button prevPageButton;
     @FXML
     private Button nextPageButton;
+    @FXML
+    private CheckBox likedMovies;
+    @FXML
+    private CheckBox watchedMovies;
+    @FXML
+    private CheckBox watchList;
 
     private final MovieService movieService = new MovieService();
     private int currentPage = 1;
