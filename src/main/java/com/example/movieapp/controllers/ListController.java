@@ -27,10 +27,6 @@ public class ListController {
     @FXML
     private GridPane resultsGrid;
     @FXML
-    private Button prevPageButton;
-    @FXML
-    private Button nextPageButton;
-    @FXML
     private CheckBox likedMovies;
     @FXML
     private CheckBox watchedMovies;
@@ -38,25 +34,25 @@ public class ListController {
     private CheckBox watchList;
 
     private final MovieService movieService = new MovieService();
-    private int currentPage = 1;
 
     private void updateResults(String database) {
         // Clear previous results
         resultsGrid.getChildren().clear();
 
-        ArrayList<Movie> movies = new ArrayList<Movie>();
+        ArrayList<Integer> movieIDs = new ArrayList<Integer>();
         // Get the movie data
         switch (database) {
             case "Liked_Movies" -> {
-                movies = database.getLikedMovies();
+                movieIDs = database.getLikedMovies();
             }
             case "Watched_Movies" -> {
-                movies = database.getWatchedMovies();
+                movieIDs = database.getWatchedMovies();
             }
             case "To_Watch" -> {
-                movies = database.getToWatch();
+                movieIDs = database.getToWatch();
             }
         }
+        //must add api calls to create a list of movie objects
 
         int row = 0;
         int col = 0;
@@ -112,9 +108,5 @@ public class ListController {
                 row++;
             }
         }
-
-        // Disable next/prev buttons based on the page
-        prevPageButton.setDisable(currentPage == 1);
-        nextPageButton.setDisable(movies.size() < 20);
     }
 }
