@@ -21,7 +21,7 @@ public class Database {
             stmt.setString(1, id);
             stmt.execute();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Database error: " + e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class Database {
             stmt.setString(1, id);
             stmt.execute();
         }catch(SQLException e) {
-            e.printStackTrace();
+            System.out.println("Database error: " + e.getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ public class Database {
             stmt.setString(1, id);
             stmt.execute();
         }catch(SQLException e) {
-            e.printStackTrace();
+            System.out.println("Database error: " + e.getMessage());
         }
     }
 
