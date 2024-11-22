@@ -3,6 +3,7 @@ package com.example.movieapp;
 import com.google.gson.annotations.SerializedName;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Movie {
     // Instance variables
@@ -16,6 +17,10 @@ public class Movie {
     private int id;
     @SerializedName("poster_path")
     private String posterPath;
+    @SerializedName("overview")
+    private String overview;
+    @SerializedName("vote_average")
+    private float voteAverage;
 
     @Override
     public String toString() {
@@ -23,10 +28,15 @@ public class Movie {
     }
 
     public String getFormattedReleaseDate() {
-        LocalDate date = LocalDate.parse(releaseDate);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
-        return date.format(formatter);
+        if (releaseDate == null || releaseDate.isEmpty()) {
+            return "Unknown Release Date";
+        }
+        try {
+            LocalDate date = LocalDate.parse(releaseDate);
+            return date.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+        } catch (DateTimeParseException e) {
+            return "Invalid Date Format";
+        }
     }
 
     // Getters
@@ -46,6 +56,10 @@ public class Movie {
 
     public String getPosterPath() {return posterPath;}
 
+    public String getOverview() {return overview;}
+
+    public float getVoteAverage() {return voteAverage;}
+
     // Setters
     public void setTitle(String title) {
         this.title = title;
@@ -62,4 +76,9 @@ public class Movie {
     public void setId(int id) {this.id = id;}
 
     public void setPosterPath(String posterPath) { this.posterPath = posterPath;}
+
+    public void setOverview(String overview) { this.overview = overview; }
+
+    public void setVoteAverage(float voteAverage) { this.voteAverage = voteAverage; }
+
 }
