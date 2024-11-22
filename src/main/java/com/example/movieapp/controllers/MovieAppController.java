@@ -1,5 +1,7 @@
-package com.example.movieapp;
+package com.example.movieapp.controllers;
 
+import com.example.movieapp.services.MovieService;
+import com.example.movieapp.models.Movie;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

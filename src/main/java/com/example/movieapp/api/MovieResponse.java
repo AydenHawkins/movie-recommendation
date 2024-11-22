@@ -1,4 +1,6 @@
-package com.example.movieapp;
+package com.example.movieapp.api;
+
+import com.example.movieapp.models.Movie;
 
 import java.util.List;
 
