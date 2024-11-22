@@ -63,6 +63,10 @@ public class Database {
         }
     }
 
+    /**removes given movieID from the Liked_Movies database
+     *
+     * @param movieID the ID of the movie to remove
+     */
     public static void removeLikedMovie(int movieID) {
         String ID = String.valueOf(movieID);
         String sql = "DELETE FROM Liked_Movies WHERE movie_id = ?";
@@ -80,6 +84,10 @@ public class Database {
         }
     }
 
+    /**removes given movieID from the Watched_Movies database
+     *
+     * @param movieID the ID of the movie to remove
+     */
     public static void removeWatchedMovie(int movieID) {
         String ID = String.valueOf(movieID);
         String sql = "DELETE FROM Watched_Movies WHERE movie_id = ?";
@@ -97,6 +105,10 @@ public class Database {
         }
     }
 
+    /**removes given movieID from the To_Watch database
+     *
+     * @param movieID the ID of the movie to remove
+     */
     public static void removeToWatch(int movieID) {
         String ID = String.valueOf(movieID);
         String sql = "DELETE FROM To_Watch WHERE movie_id = ?";
@@ -114,6 +126,10 @@ public class Database {
         }
     }
 
+    /** returns an ArrayList consisting of all movieIDs in the Liked_Movies table
+     *
+     * @return ArrayList of all movieIDs
+     */
     public static ArrayList<String> getLikedMovies() {
         String sql = "SELECT * FROM Liked_Movies";
         ArrayList<String> likedIDs = new ArrayList<>();
@@ -138,6 +154,10 @@ public class Database {
         return likedIDs;
     }
 
+    /** returns an ArrayList consisting of all movieIDs in the Watched_Movies table
+     *
+     * @return ArrayList of all movieIDs
+     */
     public static ArrayList<String> getWatchedMovies() {
         String sql = "SELECT * FROM Watched_Movies";
         ArrayList<String> watchedIDs = new ArrayList<>();
@@ -162,6 +182,10 @@ public class Database {
         return watchedIDs;
     }
 
+    /** returns an ArrayList consisting of all movieIDs in the To_Watch table
+     *
+     * @return ArrayList of all movieIDs
+     */
     public static ArrayList<String> getToWatch() {
         String sql = "SELECT * FROM To_Watch";
         ArrayList<String> toWatchIDs = new ArrayList<>();
