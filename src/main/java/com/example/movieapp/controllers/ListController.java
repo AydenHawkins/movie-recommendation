@@ -49,6 +49,10 @@ public class ListController {
     private static final String DISCOVER_SCENE_PATH = "/com/example/movieapp/discover.fxml";
     private static final String LIST_SCENE_PATH = "/com/example/movieapp/list.fxml";
 
+    public void initialize(){
+        //figure out how to get the given list when switching scenes
+        updateResults("Liked_Movies");
+    }
     @FXML
     public void handleSearchSceneButton() throws IOException {
         SceneManager.switchScene(SEARCH_SCENE_PATH);
@@ -63,9 +67,16 @@ public class ListController {
     public void handleWatchListSelectionChange(String selectedList) {
         try {
             switch (selectedList) {
-                case "Liked Movies", "Seen", "To Watch":
+                case "Liked Movies":
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    updateResults("Liked_Movies");
                     break;
+                case "Seen":
+                    SceneManager.switchScene(LIST_SCENE_PATH);
+                    updateResults("Watched_Movies");
+                case "To Watch":
+                    SceneManager.switchScene(LIST_SCENE_PATH);
+                    updateResults("To_Watch");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package com.example.movieapp.controllers;
 
 import com.example.movieapp.SceneManager;
+import com.example.movieapp.database.Database;
 import com.example.movieapp.services.MovieService;
 import com.example.movieapp.models.Movie;
 import javafx.fxml.FXML;

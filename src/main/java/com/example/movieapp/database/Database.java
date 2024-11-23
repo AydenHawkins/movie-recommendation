@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Database {
 
-    private static final String url = "jdbc:sqlite:movieuserdata.db";
+    private static final String url = "jdbc:sqlite:src/main/java/com/example/movieapp/database/movieuserdata.db";
 
     /** Takes a movieID and inserts it into the database into table Liked_Movie
      *
@@ -15,8 +15,7 @@ public class Database {
         String id = String.valueOf(movieID);
         String sql = "INSERT INTO Liked_Movies VALUES(?)";
 
-        try(var conn = DriverManager.getConnection(url);
-        var stmt = conn.prepareStatement(sql)){
+        try(var conn = DriverManager.getConnection(url); var stmt = conn.prepareStatement(sql)){
             //putting the movie ID into the ? parameter in the sql statement
             stmt.setString(1, id);
             stmt.execute();

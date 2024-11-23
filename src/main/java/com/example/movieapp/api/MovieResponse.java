@@ -42,4 +42,14 @@ public class MovieResponse {
     public void setTotalResults(int total_results) {
         this.total_results = total_results;
     }
+
+    @Override
+    public String toString() {
+        return "MovieResponse{" +
+                "page=" + page +
+                ", results=" + results +
+                ", total_pages=" + total_pages +
+                ", total_results=" + total_results +
+                '}';
+    }
 }

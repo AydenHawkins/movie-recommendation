@@ -24,4 +24,21 @@ public class ApiClient {
             return null;
         }
     }
+
+    public String sendRequestByID(String endpoint, String queryParameters, int page) {
+        try {
+            String url = String.format("%s/%s%s?api_key=%s&page=%d", API_URL, endpoint, queryParameters, API_KEY, page);
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.body();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
