@@ -51,7 +51,7 @@ public class ListController {
 
     public void initialize(){
         //figure out how to get the given list when switching scenes
-        updateResults("Liked_Movies");
+        updateResults(SceneManager.getListTable());
     }
     @FXML
     public void handleSearchSceneButton() throws IOException {
@@ -68,15 +68,14 @@ public class ListController {
         try {
             switch (selectedList) {
                 case "Liked Movies":
+                    SceneManager.setListTable("Liked_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
-                    updateResults("Liked_Movies");
-                    break;
                 case "Seen":
+                    SceneManager.setListTable("Watched_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
-                    updateResults("Watched_Movies");
                 case "To Watch":
+                    SceneManager.setListTable("To_Watch");
                     SceneManager.switchScene(LIST_SCENE_PATH);
-                    updateResults("To_Watch");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

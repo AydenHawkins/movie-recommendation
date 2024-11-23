@@ -10,6 +10,16 @@ import java.util.Objects;
 public class SceneManager {
     private static Stage primaryStage;
 
+    private String listTable;
+
+    public static void setListTable(String listTable){
+        this.listTable = listTable;
+    }
+
+    public static String getListTable(){
+        return listTable;
+    }
+
     public static void setPrimaryStage(Stage stage) {
         primaryStage = stage;
     }

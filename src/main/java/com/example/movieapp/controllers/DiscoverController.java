@@ -74,9 +74,15 @@ public class DiscoverController {
     public void handleWatchListSelectionChange(String selectedList) {
         try {
             switch (selectedList) {
-                case "Liked Movies", "Seen", "To Watch":
+                case "Liked Movies":
+                    SceneManager.setListTable("Liked_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
-                    break;
+                case "Seen":
+                    SceneManager.setListTable("Watched_Movies");
+                    SceneManager.switchScene(LIST_SCENE_PATH);
+                case "To Watch":
+                    SceneManager.setListTable("To_Watch");
+                    SceneManager.switchScene(LIST_SCENE_PATH);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
