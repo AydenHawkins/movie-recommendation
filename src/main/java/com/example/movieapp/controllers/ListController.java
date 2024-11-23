@@ -18,7 +18,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,13 @@ public class ListController {
         //figure out how to get the given list when switching scenes
         updateResults(SceneManager.getListTable());
     }
+    @FXML
+    public void initialize() {
+        watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
+        watchListChoiceBox.setValue("Watch Lists");
+        watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
+    }
+
     @FXML
     public void handleSearchSceneButton() throws IOException {
         SceneManager.switchScene(SEARCH_SCENE_PATH);

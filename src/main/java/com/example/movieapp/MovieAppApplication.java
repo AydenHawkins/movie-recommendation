@@ -7,7 +7,7 @@ public class MovieAppApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         SceneManager.setPrimaryStage(primaryStage);
-        SceneManager.switchScene("/com/example/movieapp/discover.fxml");
+        SceneManager.switchScene("/com/example/movieapp/search.fxml");
     }
 
     public static void main(String[] args) {
