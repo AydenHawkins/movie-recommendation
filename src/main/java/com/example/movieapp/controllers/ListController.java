@@ -1,5 +1,6 @@
 package com.example.movieapp.controllers;
 
+import com.example.movieapp.SceneManager;
 import com.example.movieapp.models.Movie;
 import com.example.movieapp.services.MovieService;
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.movieapp.database.Database;
@@ -27,6 +31,12 @@ public class ListController {
     @FXML
     public ScrollPane scrollPane;
     @FXML
+    public Button searchSceneButton;
+    @FXML
+    public ChoiceBox watchListChoiceBox;
+    @FXML
+    public Button discoverSceneButton;
+    @FXML
     private GridPane resultsGrid;
     @FXML
     private CheckBox likedMovies;
@@ -36,6 +46,32 @@ public class ListController {
     private CheckBox watchList;
 
     private final MovieService movieService = new MovieService();
+    private static final String SEARCH_SCENE_PATH = "/com/example/movieapp/search.fxml";
+    private static final String DISCOVER_SCENE_PATH = "/com/example/movieapp/discover.fxml";
+    private static final String LIST_SCENE_PATH = "/com/example/movieapp/list.fxml";
+
+    @FXML
+    public void handleSearchSceneButton() throws IOException {
+        SceneManager.switchScene(SEARCH_SCENE_PATH);
+    }
+
+    @FXML
+    public void handleDiscoverSceneButton() throws IOException {
+        SceneManager.switchScene(DISCOVER_SCENE_PATH);
+    }
+
+    @FXML
+    public void handleWatchListSelectionChange(String selectedList) {
+        try {
+            switch (selectedList) {
+                case "Liked Movies", "Seen", "To Watch":
+                    SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private void updateResults(String database) {
         // Clear previous results

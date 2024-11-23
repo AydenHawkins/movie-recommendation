@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -8,18 +9,16 @@
 
 <AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.ListController">
 
-  <!-- Search Field and Button (Center aligned at the top) -->
-  <HBox alignment="CENTER" layoutY="20.0" spacing="10.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" />
+    <!-- Search Field and Button (Center aligned at the top) -->
+    <HBox alignment="TOP_RIGHT" layoutY="20.0" spacing="10.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+        <Button fx:id="searchSceneButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleSearchSceneButton" onMouseClicked="#handleSearchSceneButton" text="Search" />
+        <Button fx:id="discoverSceneButton" mnemonicParsing="false" onAction="#handleDiscoverSceneButton" onMouseClicked="#handleDiscoverSceneButton" text="Discover" />
+        <ChoiceBox fx:id="watchListChoiceBox" prefHeight="26.0" prefWidth="100.0" />
+    </HBox>
 
-  <!-- Scrollable GridPane for movie results -->
-  <ScrollPane fx:id="scrollPane" layoutX="0.8" layoutY="80.0" prefHeight="36.0" prefWidth="389.0" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
-    <GridPane fx:id="resultsGrid" hgap="10.0" vgap="10.0" />
-  </ScrollPane>
-
-  <!-- Pagination buttons (aligned at the bottom) -->
-  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="392.0" spacing="10.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
-   <CheckBox fx:id="likedMovies" layoutX="11.0" layoutY="20.0" mnemonicParsing="false" text="Liked Movies" />
-   <CheckBox fx:id="watchedMovies" layoutX="141.0" layoutY="20.0" mnemonicParsing="false" text="Watched Movies" />
-   <CheckBox fx:id="watchList" layoutX="301.0" layoutY="20.0" mnemonicParsing="false" text="Watch List" />
+    <!-- Scrollable GridPane for movie results -->
+    <ScrollPane fx:id="scrollPane" layoutX="20.0" layoutY="80.0" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
+        <GridPane fx:id="resultsGrid" hgap="10.0" vgap="10.0" />
+    </ScrollPane>
 
 </AnchorPane>

@@ -17,7 +17,7 @@ public class SceneManager {
     public static void switchScene(String fxmlPath) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(SceneManager.class.getResource(fxmlPath)));
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
         primaryStage.show();
+        primaryStage.setMaximized(true);
     }
 }

@@ -1,10 +1,12 @@
 package com.example.movieapp.controllers;
 
+import com.example.movieapp.SceneManager;
 import com.example.movieapp.services.MovieService;
 import com.example.movieapp.models.Movie;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -17,14 +19,21 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import java.io.IOException;
 import java.util.List;
 
-public class MovieAppController {
+public class SearchController {
 
     @FXML
     public AnchorPane anchorPane;
     @FXML
     public ScrollPane scrollPane;
+    @FXML
+    public Button searchSceneButton;
+    @FXML
+    public Button discoverSceneButton;
+    @FXML
+    public ChoiceBox watchListChoiceBox;
     @FXML
     private TextField searchField;
     @FXML
@@ -37,7 +46,44 @@ public class MovieAppController {
     private Button nextPageButton;
 
     private final MovieService movieService = new MovieService();
+    private static final String SEARCH_SCENE_PATH = "/com/example/movieapp/search.fxml";
+    private static final String DISCOVER_SCENE_PATH = "/com/example/movieapp/discover.fxml";
+    private static final String LIST_SCENE_PATH = "/com/example/movieapp/list.fxml";
     private int currentPage = 1;
+
+    @FXML
+    public void initialize() {
+        loadDefaultMovies();
+        watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
+        watchListChoiceBox.setValue("Watch Lists");
+        watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
+    }
+
+    private void loadDefaultMovies() {
+        updateResults("");
+    }
+
+    @FXML
+    public void handleSearchSceneButton() throws IOException {
+        SceneManager.switchScene(SEARCH_SCENE_PATH);
+    }
+
+    @FXML
+    public void handleDiscoverSceneButton() throws IOException {
+        SceneManager.switchScene(DISCOVER_SCENE_PATH);
+    }
+
+    public void handleWatchListSelectionChange(String selectedList) {
+        try {
+            switch (selectedList) {
+                case "Liked Movies", "Seen", "To Watch":
+                    SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Called when the search button is clicked
     @FXML
@@ -53,8 +99,13 @@ public class MovieAppController {
         // Clear previous results
         resultsGrid.getChildren().clear();
 
-        // Get the movie data
-        List<Movie> movies = movieService.searchMovies(query, currentPage);
+        List<Movie> movies;
+        if (query.isEmpty()) {
+            movies = movieService.getPopularMovies(query, currentPage);
+        } else {
+            // Get the movie data
+            movies = movieService.searchMovies(query, currentPage);
+        }
 
         int row = 0;
         int col = 0;
