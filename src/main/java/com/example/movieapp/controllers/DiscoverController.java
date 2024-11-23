@@ -4,7 +4,9 @@ import com.example.movieapp.SceneManager;
 import com.example.movieapp.services.MovieService;
 import com.example.movieapp.models.Movie;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.List;
+import com.example.movieapp.controllers.PopupController;
 
 public class DiscoverController {
     @FXML
@@ -129,7 +132,23 @@ public class DiscoverController {
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);
 
-            movieBox.setOnMouseClicked(event -> showMovieDetailsPopup(movie));
+            movieBox.setOnMouseClicked(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movieapp/popup.fxml"));
+                    Parent root = loader.load();
+                    PopupController popupController = loader.getController();
+                    popupController.showMoviePopup(movie);
+
+                    Scene popupScene = new Scene(root);
+                    Stage popupStage = new Stage();
+                    popupStage.initModality(Modality.APPLICATION_MODAL);
+                    popupStage.setTitle(movie.getTitle());
+                    popupStage.setScene(popupScene);
+                    popupStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
 
             // Add the VBox to the grid
             resultsGrid.add(movieBox, col, row);
