@@ -21,4 +21,9 @@
         <GridPane fx:id="resultsGrid" hgap="10.0" vgap="10.0" />
     </ScrollPane>
 
+  <!-- Pagination buttons (aligned at the bottom) -->
+  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="392.0" spacing="10.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
+   <Button fx:id="likedMovies" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" text="Liked Movies" />
+   <Button fx:id="watchedMovies" layoutX="144.0" layoutY="43.0" mnemonicParsing="false" text="Watched Movies" />
+   <Button fx:id="watchList" layoutX="312.0" layoutY="43.0" mnemonicParsing="false" text="Watch List" />
 </AnchorPane>

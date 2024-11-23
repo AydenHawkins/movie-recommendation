@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -39,11 +38,11 @@ public class ListController {
     @FXML
     private GridPane resultsGrid;
     @FXML
-    private CheckBox likedMovies;
+    private Button likedMovies;
     @FXML
-    private CheckBox watchedMovies;
+    private Button watchedMovies;
     @FXML
-    private CheckBox watchList;
+    private Button watchList;
 
     private final MovieService movieService = new MovieService();
     private static final String SEARCH_SCENE_PATH = "/com/example/movieapp/search.fxml";
@@ -188,5 +187,20 @@ public class ListController {
         // Set the scene and show the popup
         popupStage.setScene(popupScene);
         popupStage.show();
+    }
+
+    @FXML
+    private void handleLikedMovies(){
+        updateResults("Liked_Movies");
+    }
+
+    @FXML
+    private void handleWatchedMovies(){
+        updateResults("Watched_Movies");
+    }
+
+    @FXML
+    private void handleWatchList(){
+        updateResults("Watch_List");
     }
 }
