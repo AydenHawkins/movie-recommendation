@@ -12,14 +12,14 @@
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.SearchController">
 
     <!-- Top bar with Search, Discover buttons, and ChoiceBox -->
-    <HBox alignment="TOP_RIGHT" layoutX="788.0" layoutY="59.0" prefHeight="26.0" prefWidth="258.0" spacing="10.0" AnchorPane.leftAnchor="788.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="59.0">
+    <HBox alignment="TOP_RIGHT" layoutX="778.4" layoutY="45.0" prefHeight="26.0" prefWidth="272.0" spacing="10.0" AnchorPane.leftAnchor="778.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="45.0">
         <Button fx:id="searchSceneButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleSearchSceneButton" text="Search" />
         <Button fx:id="discoverSceneButton" mnemonicParsing="false" onAction="#handleDiscoverSceneButton" text="Discover" />
         <ChoiceBox fx:id="watchListChoiceBox" prefHeight="26.0" prefWidth="100.0" />
     </HBox>
 
     <!-- Search Field and Search Button -->
-    <HBox spacing="10.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="660.0" AnchorPane.topAnchor="60.0">
+    <HBox layoutX="10.4" layoutY="45.8" prefHeight="26.0" prefWidth="417.0" spacing="10.0" AnchorPane.leftAnchor="10.4" AnchorPane.rightAnchor="632.8000000000001" AnchorPane.topAnchor="45.8">
         <TextField fx:id="searchField" alignment="TOP_LEFT" prefWidth="300.0" promptText="Enter movie title">
             <HBox.margin>
                 <Insets left="25.0" />
