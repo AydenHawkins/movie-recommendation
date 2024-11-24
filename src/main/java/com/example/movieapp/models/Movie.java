@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class Movie {
     // Instance variables
@@ -21,6 +22,14 @@ public class Movie {
     private String overview;
     @SerializedName("vote_average")
     private float voteAverage;
+    @SerializedName("runtime")
+    private int runtime;
+    @SerializedName("revenue")
+    private double revenue;
+    @SerializedName("budget")
+    private double budget;
+    @SerializedName("genres")
+    private List<Genre> genres;
 
     @Override
     public String toString() {
@@ -60,6 +69,22 @@ public class Movie {
 
     public float getVoteAverage() {return voteAverage;}
 
+    public List<Genre> genres() {
+        return genres;
+    }
+
+    public double budget() {
+        return budget;
+    }
+
+    public double revenue() {
+        return revenue;
+    }
+
+    public int runtime() {
+        return runtime;
+    }
+
     // Setters
     public void setTitle(String title) {
         this.title = title;
@@ -81,4 +106,19 @@ public class Movie {
 
     public void setVoteAverage(float voteAverage) { this.voteAverage = voteAverage; }
 
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public void setRevenue(double revenue) {
+        this.revenue = revenue;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
 }
