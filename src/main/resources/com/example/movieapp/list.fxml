@@ -7,6 +7,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
 <AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.ListController">
 
     <!-- Search Field and Button (Center aligned at the top) -->
@@ -20,5 +24,29 @@
     <ScrollPane fx:id="scrollPane" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="60" AnchorPane.bottomAnchor="0">
         <GridPane fx:id="resultsGrid" hgap="10.0" vgap="10.0" />
     </ScrollPane>
+
+    <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="15.0" prefHeight="36.0" prefWidth="622.0">
+        <Label text="Genre:">
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </Label>
+        <ComboBox fx:id="genreComboBox" prefWidth="150.0">
+            <HBox.margin>
+                <Insets right="15.0" />
+            </HBox.margin>
+        </ComboBox>
+        <Label text="Year:">
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </Label>
+        <TextField fx:id="yearTextField" prefWidth="150.0">
+            <HBox.margin>
+                <Insets right="100.0" />
+            </HBox.margin>
+        </TextField>
+        <Button mnemonicParsing="false" onAction="#handleApplyFiltersButton" text="Apply Filters" />
+    </HBox>
 
 </AnchorPane>

@@ -87,12 +87,15 @@ public class DiscoverController {
                 case "Liked Movies":
                     SceneManager.setListTable("Liked_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
                 case "Seen":
                     SceneManager.setListTable("Watched_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
                 case "To Watch":
                     SceneManager.setListTable("To_Watch");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

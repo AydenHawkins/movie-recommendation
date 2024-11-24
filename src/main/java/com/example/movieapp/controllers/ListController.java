@@ -8,9 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +20,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.example.movieapp.database.Database;
 
 public class ListController {
@@ -37,20 +38,26 @@ public class ListController {
     @FXML
     public Button discoverSceneButton;
     @FXML
+    public ComboBox genreComboBox;
+    @FXML
+    public TextField yearTextField;
+    @FXML
     private GridPane resultsGrid;
 
     private final MovieService movieService = new MovieService();
     private static final String SEARCH_SCENE_PATH = "/com/example/movieapp/search.fxml";
     private static final String DISCOVER_SCENE_PATH = "/com/example/movieapp/discover.fxml";
     private static final String LIST_SCENE_PATH = "/com/example/movieapp/list.fxml";
+    private Map<String, String> currentFilters = new HashMap<>();
 
     @FXML
     public void initialize() {
         watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
         watchListChoiceBox.setValue("Watch Lists");
         watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
+        genreComboBox.getItems().addAll("Action", "Comedy", "Drama", "Horror", "Science Fiction");
 
-        updateResults(SceneManager.getListTable());
+        updateResults(SceneManager.getListTable(), currentFilters);
     }
 
     @FXML
@@ -70,19 +77,27 @@ public class ListController {
                 case "Liked Movies":
                     SceneManager.setListTable("Liked_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
                 case "Seen":
                     SceneManager.setListTable("Watched_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
                 case "To Watch":
                     SceneManager.setListTable("To_Watch");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void updateResults(String database) {
+    @FXML
+    public void handleApplyFiltersButton() throws IOException {
+        applyFilters();
+    }
+
+    private void updateResults(String database, Map<String, String> filters) {
         // Clear previous results
         resultsGrid.getChildren().clear();
 
@@ -101,6 +116,30 @@ public class ListController {
 
         int row = 0;
         int col = 0;
+
+        List<Movie> filteredMovies = new ArrayList<>(movies);
+
+        if (!filters.isEmpty()) {
+            for (Movie movie : filteredMovies) {
+                for (Map.Entry<String, String> entry : filters.entrySet()) {
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+
+                    switch (key) {
+                        case "with_genres":
+                            if (!movie.getGenres().contains(value)) {
+                                movies.remove(movie);
+                            }
+                            break;
+                        case "primary_release_year":
+                            if (!movie.getReleaseDate().substring(0, 4).equals(value)) {
+                                movies.remove(movie);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
 
         // Add movie posters, titles, and release dates to the grid
         for (Movie movie : movies) {
@@ -172,5 +211,28 @@ public class ListController {
                 row++;
             }
         }
+    }
+
+    @FXML
+    public void applyFilters() {
+        // Collect user-selected filters
+        currentFilters.clear();
+
+        if (genreComboBox.getValue() != null) {
+            currentFilters.put("with_genres", movieService.getGenreId(genreComboBox.getValue().toString()));
+        }
+        if (!yearTextField.getText().isEmpty()) {
+            try {
+                int year = Integer.parseInt(yearTextField.getText());
+                if (year < 1900 || year > 2099) {
+                    throw new NumberFormatException("Year out of range");
+                }
+                currentFilters.put("primary_release_year", String.valueOf(year));
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid year: " + yearTextField.getText());
+            }
+        }
+        // Update the UI
+        updateResults(SceneManager.getListTable(), currentFilters);
     }
 }

@@ -80,8 +80,8 @@ public class PopupController {
         synopsis.setText(movie.getOverview());
 
         // set runtime
-        int hours = movie.runtime() % 60;
-        int minutes = movie.runtime() / 60;
+        int hours = movie.getRuntime() % 60;
+        int minutes = movie.getRuntime() / 60;
         runtime.setText(String.format("%dh %dm", hours, minutes));
 
         // set genres

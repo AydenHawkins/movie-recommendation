@@ -69,19 +69,19 @@ public class Movie {
 
     public float getVoteAverage() {return voteAverage;}
 
-    public List<Genre> genres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public double budget() {
+    public double getBudget() {
         return budget;
     }
 
-    public double revenue() {
+    public double getRevenue() {
         return revenue;
     }
 
-    public int runtime() {
+    public int getRuntime() {
         return runtime;
     }
 

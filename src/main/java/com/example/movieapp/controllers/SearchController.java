@@ -76,12 +76,15 @@ public class SearchController {
                 case "Liked Movies":
                     SceneManager.setListTable("Liked_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
                 case "Seen":
                     SceneManager.setListTable("Watched_Movies");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
                 case "To Watch":
                     SceneManager.setListTable("To_Watch");
                     SceneManager.switchScene(LIST_SCENE_PATH);
+                    break;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -187,50 +190,6 @@ public class SearchController {
         // Disable next/prev buttons based on the page
         prevPageButton.setDisable(currentPage == 1);
         nextPageButton.setDisable(movies.size() < 20);
-    }
-
-    private void showMovieDetailsPopup(Movie movie) {
-        // Create a new stage for the popup
-        Stage popupStage = new Stage();
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle(movie.getTitle());
-
-        // Create a VBox for the movie details
-        VBox detailsPane = new VBox();
-        detailsPane.setAlignment(Pos.CENTER);
-        detailsPane.setSpacing(20);
-        detailsPane.setStyle("-fx-background-color: #ffffff; -fx-padding: 20;");
-
-        // Add the movie's poster
-        ImageView posterView = new ImageView(new Image("https://image.tmdb.org/t/p/w500" + movie.getPosterPath()));
-        posterView.setFitWidth(300);
-        posterView.setFitHeight(450);
-
-        // Add the movie's title
-        Text title = new Text(movie.getTitle());
-        title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
-
-        // Add the movie's release date
-        Text releaseDate = new Text(movie.getFormattedReleaseDate());
-
-        // Add the movie's overview
-        Text overview = new Text(movie.getOverview());
-        overview.setWrappingWidth(400);
-        overview.setStyle("-fx-font-size: 16px;");
-
-        // Add a close button
-        Button closeButton = new Button("Close");
-        closeButton.setOnAction(event -> popupStage.close());
-
-        // Add all components to the detailsPane
-        detailsPane.getChildren().addAll(posterView, title, releaseDate, overview, closeButton);
-
-        // Create a new scene for the popup
-        Scene popupScene = new Scene(detailsPane, 500, 700);
-
-        // Set the scene and show the popup
-        popupStage.setScene(popupScene);
-        popupStage.show();
     }
 
     // Called when the next page button is clicked
