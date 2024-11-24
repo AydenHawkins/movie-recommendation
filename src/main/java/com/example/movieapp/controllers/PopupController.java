@@ -7,8 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
-
 import java.io.IOException;
+import com.example.movieapp.database.Database;
 
 public class PopupController {
 
@@ -70,13 +70,30 @@ public class PopupController {
         synopsis.setText(movie.getOverview());
 
         // set buttons
-//            like_image.setImage(new Image("../assets/LIKE.png"));
-//
-//            watched_image.setImage(new Image("../assets/NOT_WATCHED.png"));
-//
-//            towatch_image.setImage(new Image("../assets/ADDTOWATCHLIST.png"));
+        boolean inLikedMovies = Database.getLikedMovies().contains(movie.getId());
+        boolean inWatchedMovies = Database.getWatchedMovies().contains(movie.getId());
+        boolean inWatchList = Database.getToWatch().contains(movie.getId());
 
+        // if movie is in liked list
+        if (inLikedMovies) {
+            like_image.setImage(new Image(getClass().getResource("/images/LIKED.png").toString(), true));
+        } else {
+            like_image.setImage(new Image(getClass().getResource("/images/LIKE.png").toString(), true));
+        }
 
+        // if movie is in watched movies list
+        if (inWatchedMovies) {
+            watched_image.setImage(new Image(getClass().getResource("/images/WATCHED.png").toString(), true));
+        } else {
+            watched_image.setImage(new Image(getClass().getResource("/images/NOT_WATCHED.png").toString(), true));
+        }
 
+        // if movie is in ToWatch list
+        if (inWatchList) {
+            towatch_image.setImage(new Image(getClass().getResource("/images/ONWATCHLIST.png").toString(), true));
+        } else {
+            towatch_image.setImage(new Image(getClass().getResource("/images/ADDTOWATCHLIST.png").toString(), true));
+        }
     }
+
 }

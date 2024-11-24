@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class SceneManager {
     private static Stage primaryStage;
+    private static String listTable;
 
     private String listTable;
 
@@ -23,6 +24,14 @@ public class SceneManager {
 
     public static void setPrimaryStage(Stage stage) {
         primaryStage = stage;
+    }
+
+    public static String getListTable() {
+        return listTable;
+    }
+
+    public static void setListTable(String listTable) {
+        SceneManager.listTable = listTable;
     }
 
     public static void switchScene(String fxmlPath) throws IOException {
