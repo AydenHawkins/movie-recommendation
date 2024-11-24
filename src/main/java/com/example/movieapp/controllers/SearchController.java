@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.List;
-import com.example.movieapp.controllers.PopupController;
 
 public class SearchController {
 
@@ -56,14 +55,9 @@ public class SearchController {
 
     @FXML
     public void initialize() {
-        loadDefaultMovies();
         watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
         watchListChoiceBox.setValue("Watch Lists");
         watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
-    }
-
-    private void loadDefaultMovies() {
-        updateResults("");
     }
 
     @FXML
@@ -171,6 +165,9 @@ public class SearchController {
                     popupStage.initModality(Modality.APPLICATION_MODAL);
                     popupStage.setTitle(movie.getTitle());
                     popupStage.setScene(popupScene);
+                    popupStage.setResizable(false);
+                    popupStage.setMaximized(false);
+                    popupStage.setIconified(false);
                     popupStage.show();
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -4,7 +4,9 @@ import com.example.movieapp.SceneManager;
 import com.example.movieapp.models.Movie;
 import com.example.movieapp.services.MovieService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -36,12 +38,6 @@ public class ListController {
     public Button discoverSceneButton;
     @FXML
     private GridPane resultsGrid;
-    @FXML
-    private Button likedMovies;
-    @FXML
-    private Button watchedMovies;
-    @FXML
-    private Button watchList;
 
     private final MovieService movieService = new MovieService();
     private static final String SEARCH_SCENE_PATH = "/com/example/movieapp/search.fxml";
@@ -100,7 +96,7 @@ public class ListController {
         //must add api calls to create a list of movie objects
         List<Movie> movies = new ArrayList<>();
         for (int movieID : movieIDs){
-            movies.add(MovieService.getMovieByID(String.valueOf(movieID), 1));
+            movies.add(MovieService.getMovieByID(String.valueOf(movieID)));
         }
 
         int row = 0;
@@ -146,7 +142,26 @@ public class ListController {
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);
 
-            movieBox.setOnMouseClicked(event -> showMovieDetailsPopup(movie));
+            movieBox.setOnMouseClicked(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movieapp/popup.fxml"));
+                    Parent root = loader.load();
+                    PopupController popupController = loader.getController();
+                    popupController.showMoviePopup(movie);
+
+                    Scene popupScene = new Scene(root);
+                    Stage popupStage = new Stage();
+                    popupStage.initModality(Modality.APPLICATION_MODAL);
+                    popupStage.setTitle(movie.getTitle());
+                    popupStage.setScene(popupScene);
+                    popupStage.setResizable(false);
+                    popupStage.setMaximized(false);
+                    popupStage.setIconified(false);
+                    popupStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
 
             // Add the VBox to the grid
             resultsGrid.add(movieBox, col, row);
@@ -157,49 +172,5 @@ public class ListController {
                 row++;
             }
         }
-    }
-
-    private void showMovieDetailsPopup(Movie movie) {
-        // Create a new stage for the popup
-        Stage popupStage = new Stage();
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle(movie.getTitle());
-
-        // Create a VBox for the movie details
-        VBox detailsPane = new VBox();
-        detailsPane.setAlignment(Pos.CENTER);
-        detailsPane.setSpacing(20);
-        detailsPane.setStyle("-fx-background-color: #ffffff; -fx-padding: 20;");
-
-        // Add the movie's poster
-        ImageView posterView = new ImageView(new Image("https://image.tmdb.org/t/p/w500" + movie.getPosterPath()));
-        posterView.setFitWidth(300);
-        posterView.setFitHeight(450);
-
-        // Add the movie's title
-        Text title = new Text(movie.getTitle());
-        title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
-
-        // Add the movie's release date
-        Text releaseDate = new Text(movie.getFormattedReleaseDate());
-
-        // Add the movie's overview
-        Text overview = new Text(movie.getOverview());
-        overview.setWrappingWidth(400);
-        overview.setStyle("-fx-font-size: 16px;");
-
-        // Add a close button
-        Button closeButton = new Button("Close");
-        closeButton.setOnAction(event -> popupStage.close());
-
-        // Add all components to the detailsPane
-        detailsPane.getChildren().addAll(posterView, title, releaseDate, overview, closeButton);
-
-        // Create a new scene for the popup
-        Scene popupScene = new Scene(detailsPane, 500, 700);
-
-        // Set the scene and show the popup
-        popupStage.setScene(popupScene);
-        popupStage.show();
     }
 }

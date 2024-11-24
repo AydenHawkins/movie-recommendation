@@ -162,6 +162,9 @@ public class DiscoverController {
                     popupStage.initModality(Modality.APPLICATION_MODAL);
                     popupStage.setTitle(movie.getTitle());
                     popupStage.setScene(popupScene);
+                    popupStage.setResizable(false);
+                    popupStage.setMaximized(false);
+                    popupStage.setIconified(false);
                     popupStage.show();
                 } catch (IOException e) {
                     e.printStackTrace();

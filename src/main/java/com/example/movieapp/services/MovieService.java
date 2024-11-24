@@ -53,24 +53,16 @@ public class MovieService {
         return movieResponse != null ? movieResponse.getResults() : new ArrayList<>();
     }
 
-    public static Movie getMovieByID(String movieID, int page) {
+    public static Movie getMovieByID(String movieID) {
         String encodedQuery = URLEncoder.encode(movieID, StandardCharsets.UTF_8);
 
         // Send request.
-        String response = apiClient.sendRequestByID("movie/", encodedQuery, page);
+        String response = apiClient.sendRequestByID("movie/" + encodedQuery, "", 1);
 
-        // Deserialize response.
-        MovieResponse movieResponse = gson.fromJson(response, MovieResponse.class);
-        System.out.println(movieResponse);
-
-        List<Movie> movie;
-        if (movieResponse != null) {
-            movie = movieResponse.getResults();
-        } else {
-            movie = new ArrayList<>();
-        }
-        return movie.getFirst();
+        // Return the movie object
+        return gson.fromJson(response, Movie.class);
     }
+
 
     public List<Movie> discoverMovies(Map<String, String> filters, int page) {
         String queryParams = filters.entrySet().stream()
