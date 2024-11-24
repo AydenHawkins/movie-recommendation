@@ -1,29 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movie_recommendation.MovieController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="601.0" style="-fx-background-color: pink; -fx-border-insets: 2; -fx-pref-height: 400; -fx-border-style: solid; -fx-border-color: black; -fx-border-style: solid;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movie_recommendation.MovieController">
    <children>
-      <Label fx:id="titleField" alignment="CENTER" contentDisplay="CENTER" text="Movie Recommendation System" textAlignment="CENTER" />
+      <Label fx:id="titleField" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="583.0" style="-fx-alignment: center; -fx-text-fill: black;" text="Movie Recommendation System" textAlignment="CENTER" textFill="#242424">
+         <opaqueInsets>
+            <Insets bottom="2.0" left="1.0" />
+         </opaqueInsets>
+         <font>
+            <Font name="Eras Demi ITC" size="21.0" />
+         </font></Label>
       <HBox prefHeight="25.0" prefWidth="465.0">
          <children>
-            <Label text="Enter Movie:" />
-            <TextField fx:id="movieField" promptText="Name, Genre, Year, etc." />
-            <Button fx:id="recommendButton" mnemonicParsing="false" text="Recommend" />
+            <Label alignment="CENTER" prefHeight="15.0" prefWidth="79.0" text="Enter Movie:">
+               <font>
+                  <Font name="Eras Demi ITC" size="12.0" />
+               </font></Label>
+            <TextField fx:id="movieField" prefHeight="25.0" prefWidth="385.0" promptText="Name, Genre, Year, etc." style="-fx-border-color: black;" />
+            <Button fx:id="recommendButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-border-color: white;" text="Recommend" />
          </children>
       </HBox>
       <VBox>
          <children>
-            <Label text="Recommended Movies:" />
-            <ListView fx:id="recommendMoviesField" prefHeight="200.0" prefWidth="200.0" />
+            <Label alignment="CENTER" prefHeight="15.0" prefWidth="587.0" text="Recommended Movies:">
+               <font>
+                  <Font name="Eras Demi ITC" size="13.0" />
+               </font></Label>
+            <ListView fx:id="recommendMoviesField" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" />
          </children>
       </VBox>
-      <Label text="Other Genres:" />
-      <ListView fx:id="otherGenreListView" prefHeight="200.0" prefWidth="200.0" />
+      <Label alignment="CENTER" prefHeight="15.0" prefWidth="580.0" text="Other Genres:">
+         <font>
+            <Font name="Eras Demi ITC" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
+      <ListView fx:id="otherGenreListView" cache="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" />
    </children>
 </VBox>
