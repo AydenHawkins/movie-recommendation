@@ -202,19 +202,4 @@ public class ListController {
         popupStage.setScene(popupScene);
         popupStage.show();
     }
-
-    @FXML
-    private void handleLikedMovies(){
-        updateResults("Liked_Movies");
-    }
-
-    @FXML
-    private void handleWatchedMovies(){
-        updateResults("Watched_Movies");
-    }
-
-    @FXML
-    private void handleWatchList(){
-        updateResults("Watch_List");
-    }
 }
