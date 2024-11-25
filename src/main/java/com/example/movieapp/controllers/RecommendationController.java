@@ -157,7 +157,8 @@ public class RecommendationController {
                     popupStage.setResizable(false);
                     popupStage.setMaximized(false);
                     popupStage.setIconified(false);
-                    popupController.showMoviePopup(movie, popupStage);
+                    popupStage.show();
+                    popupController.setProviderLogos(movie.getId());
 
                     popupStage.show();
                 } catch (IOException e) {

@@ -175,15 +175,15 @@ public class SearchController {
 
                     Scene popupScene = new Scene(root);
                     Stage popupStage = new Stage();
+                    popupController.getMovieDetails(movie.getId(), popupStage);
                     popupStage.initModality(Modality.APPLICATION_MODAL);
                     popupStage.setTitle(movie.getTitle());
                     popupStage.setScene(popupScene);
                     popupStage.setResizable(false);
                     popupStage.setMaximized(false);
                     popupStage.setIconified(false);
-                    popupController.showMoviePopup(movie, popupStage);
-
                     popupStage.show();
+                    popupController.setProviderLogos(movie.getId());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

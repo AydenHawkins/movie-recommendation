@@ -2,26 +2,25 @@ package com.example.movieapp.controllers;
 
 import com.example.movieapp.SceneManager;
 import com.example.movieapp.models.Movie;
-import javafx.event.EventHandler;
+import com.example.movieapp.services.MovieService;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
-
 import javafx.event.ActionEvent;
-import java.io.IOException;
 import com.example.movieapp.database.Database;
 import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.List;
 
 /**Controller class for the pop-up window
  * pops up when a user clicks on a movie in another scene to give more details about it
  */
+
 public class PopupController {
 
     @FXML
@@ -66,7 +65,13 @@ public class PopupController {
     public ImageView providerlogo3;
 
     private Movie cur_movie;
+    private final MovieService movieService = new MovieService();
     private Stage popUpStage;
+
+    public void getMovieDetails(int movieID, Stage popUpStage) {
+        Movie movie = movieService.getMovieByID(String.valueOf(movieID));
+        showMoviePopup(movie, popUpStage);
+    }
 
     public void showMoviePopup(Movie movie, Stage popUpStage) {
         // set movie instance variable
@@ -94,17 +99,21 @@ public class PopupController {
         runtime.setText(String.format("%dh %dm", hours, minutes));
 
         // set genres
-//        StringBuilder sb = new StringBuilder();
-//        for (int i = 0; i < 5; i++) {
-//            // limit to 5 genres; append each genre to stringbuilder
-//            if (movie.genres().size() <= i) { break; }
-//            sb.append(movie.genres().get(i));
-//
-//            // if not last genre, add a comma and space
-//            if ( i == movie.genres().size() - 1 || i == 4) { break; }
-//            sb.append(", ");
-//        }
-//        genres.setText(sb.toString());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            // limit to 5 genres; append each genre to stringbuilder
+            if (movie.getGenres().size() <= i) { break; }
+            sb.append(movie.getGenres().get(i).getName());
+
+            // if not last genre, add a comma and space
+            if ( i == movie.getGenres().size() - 1 || i == 4) { break; }
+            sb.append(", ");
+        }
+        genres.setText(sb.toString());
+
+        String certification = movieService.getCertificationByMovieId(movie.getId());
+        mpaarating.setText(certification.equals("N/A") ? "Unrated" : certification);
+
 
         // set buttons
         boolean inLikedMovies = Database.getLikedMovies().contains(movie.getId());
@@ -130,6 +139,23 @@ public class PopupController {
             towatch_image.setImage(new Image(getClass().getResource("/images/ONWATCHLIST.png").toString(), true));
         } else {
             towatch_image.setImage(new Image(getClass().getResource("/images/ADDTOWATCHLIST.png").toString(), true));
+        }
+    }
+
+    public void setProviderLogos(int movieId) {
+        List<String> logos = movieService.getProviderLogos(movieId);
+
+        // Create an array of ImageView objects for convenience
+        ImageView[] logoViews = {providerlogo1, providerlogo2, providerlogo3};
+
+        for (int i = 0; i < logoViews.length; i++) {
+            if (logos.get(i) != null) {
+                // Load the image and set it to the ImageView
+                logoViews[i].setImage(new Image(logos.get(i)));
+            } else {
+                // Clear the ImageView if no logo is available
+                logoViews[i].setImage(null);
+            }
         }
     }
 
