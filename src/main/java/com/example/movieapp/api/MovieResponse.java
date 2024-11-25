@@ -46,6 +46,7 @@ public class MovieResponse {
         this.total_results = total_results;
     }
 
+    // Represents JSON response as a string.
     @Override
     public String toString() {
         return "MovieResponse{" +

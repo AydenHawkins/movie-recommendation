@@ -136,7 +136,7 @@ public class SearchController {
 
             // Create label for the movie title
             Text movieTitle = new Text(movie.getTitle());
-            movieTitle.setWrappingWidth(150); // Match VBox width
+            movieTitle.setWrappingWidth(150);
             movieTitle.setTextAlignment(TextAlignment.CENTER);
             movieTitle.setStyle("-fx-font-weight: bold;");
             movieTitle.setStyle("-fx-text-alignment: center;");
@@ -167,6 +167,7 @@ public class SearchController {
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);
 
+            // Initiate popup when a movie is clicked.
             movieBox.setOnMouseClicked(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movieapp/popup.fxml"));

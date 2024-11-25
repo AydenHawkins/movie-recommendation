@@ -53,35 +53,54 @@ public class ListController {
     private static final String DISCOVER_SCENE_PATH = "/com/example/movieapp/discover.fxml";
     private static final String LIST_SCENE_PATH = "/com/example/movieapp/list.fxml";
     private Map<String, String> currentFilters = new HashMap<>();
+    private static final Map<String, String> GENRE_MAP = Map.ofEntries(
+            Map.entry("Action", "28"),
+            Map.entry("Adventure", "12"),
+            Map.entry("Animation", "16"),
+            Map.entry("Comedy", "35"),
+            Map.entry("Crime", "80"),
+            Map.entry("Documentary", "99"),
+            Map.entry("Drama", "18"),
+            Map.entry("Family", "10751"),
+            Map.entry("Fantasy", "14"),
+            Map.entry("History", "36"),
+            Map.entry("Horror", "27"),
+            Map.entry("Music", "10402"),
+            Map.entry("Mystery", "9648"),
+            Map.entry("Romance", "10749"),
+            Map.entry("Science Fiction", "878"),
+            Map.entry("TV Movie", "10770"),
+            Map.entry("Thriller", "53"),
+            Map.entry("War", "10752"),
+            Map.entry("Western", "37")
+    );
 
-    private Map<String, Integer> genreNameToIdMap = new HashMap<>();
-
-    private void initializeGenreMapping() {
-        // Mapping of genre names to genre IDs (example)
-        genreNameToIdMap.put("Action", 28);
-        genreNameToIdMap.put("Comedy", 35);
-        genreNameToIdMap.put("Drama", 18);
-        genreNameToIdMap.put("Horror", 27);
-        genreNameToIdMap.put("Science Fiction", 878);
-    }
-
-
+    /**
+     * Initializes window with filters and watch list options.
+     */
     @FXML
     public void initialize() {
         watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
         watchListChoiceBox.setValue("Watch Lists");
         watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
-        genreComboBox.getItems().addAll("Action", "Comedy", "Drama", "Horror", "Science Fiction");
+        genreComboBox.getItems().addAll(GENRE_MAP.keySet());
 
         //automatically displays results based on what the user clicked on in the list drop down
         updateResults(SceneManager.getListTable(), currentFilters);
     }
 
+    /**
+     * Handles switching to search scene.
+     * @throws IOException
+     */
     @FXML
     public void handleSearchSceneButton() throws IOException {
         SceneManager.switchScene(SEARCH_SCENE_PATH);
     }
-
+    /**
+     * Handles switching to discover scene.
+     * @throws IOException
+     */
     @FXML
     public void handleDiscoverSceneButton() throws IOException {
         SceneManager.switchScene(DISCOVER_SCENE_PATH);
@@ -112,7 +131,10 @@ public class ListController {
             throw new RuntimeException(e);
         }
     }
-
+    /**
+     * Handles applying filters.
+     * @throws IOException
+     */
     @FXML
     public void handleApplyFiltersButton() throws IOException {
         applyFilters();
@@ -128,13 +150,14 @@ public class ListController {
         resultsGrid.getChildren().clear();
 
         ArrayList<Integer> movieIDs = new ArrayList<>();
-        // Get the movie data
+        // Get the movie data from database.
         switch (database) {
             case "Liked_Movies" -> movieIDs = Database.getLikedMovies();
             case "Watched_Movies" -> movieIDs = Database.getWatchedMovies();
             case "To_Watch" -> movieIDs = Database.getToWatch();
         }
-        //must add api calls to create a list of movie objects
+
+        // Send HTTP request to API to get movies from IDs.
         List<Movie> movies = new ArrayList<>();
         for (int movieID : movieIDs){
             movies.add(MovieService.getMovieByID(String.valueOf(movieID)));
@@ -145,6 +168,7 @@ public class ListController {
 
         List<Movie> filteredMovies = new ArrayList<>(movies);
 
+        // Filters movies based on filters selected by user.
         if (!filters.isEmpty()) {
             filteredMovies.removeIf(movie -> {
                 for (Map.Entry<String, String> entry : filters.entrySet()) {
@@ -167,20 +191,20 @@ public class ListController {
                                 }
                             }
 
-                            // If no matching genre, remove the movie
+                            // Remove the movie if it doesn't match one of the filters.
                             if (!genreMatch) {
-                                return true; // Remove this movie from the filtered list
+                                return true;
                             }
                             break;
 
                         case "primary_release_year":
                             if (!movie.getReleaseDate().substring(0, 4).equals(value)) {
-                                return true; // Remove this movie from the filtered list
+                                return true;
                             }
                             break;
                     }
                 }
-                return false; // Keep this movie in the filtered list
+                return false;
             });
         }
 
@@ -193,7 +217,7 @@ public class ListController {
 
             // Create label for the movie title
             Text movieTitle = new Text(movie.getTitle());
-            movieTitle.setWrappingWidth(150); // Match VBox width
+            movieTitle.setWrappingWidth(150);
             movieTitle.setTextAlignment(TextAlignment.CENTER);
             movieTitle.setStyle("-fx-font-weight: bold;");
             movieTitle.setStyle("-fx-text-alignment: center;");
@@ -224,6 +248,7 @@ public class ListController {
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);
 
+            // Initiate popup window when a movie is clicked.
             movieBox.setOnMouseClicked(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movieapp/popup.fxml"));

@@ -18,13 +18,28 @@ import java.util.stream.Collectors;
 public class MovieService {
     private static final ApiClient apiClient = new ApiClient();
     private static final Gson gson = new Gson();
-    private static final Map<String, String> GENRE_MAP = Map.of(
-            "Action", "28",
-            "Comedy", "35",
-            "Drama", "18",
-            "Horror", "27",
-            "Romance", "10749",
-            "Science Fiction", "878"
+
+    // Map of genres to their ID's
+    private static final Map<String, String> GENRE_MAP = Map.ofEntries(
+            Map.entry("Action", "28"),
+            Map.entry("Adventure", "12"),
+            Map.entry("Animation", "16"),
+            Map.entry("Comedy", "35"),
+            Map.entry("Crime", "80"),
+            Map.entry("Documentary", "99"),
+            Map.entry("Drama", "18"),
+            Map.entry("Family", "10751"),
+            Map.entry("Fantasy", "14"),
+            Map.entry("History", "36"),
+            Map.entry("Horror", "27"),
+            Map.entry("Music", "10402"),
+            Map.entry("Mystery", "9648"),
+            Map.entry("Romance", "10749"),
+            Map.entry("Science Fiction", "878"),
+            Map.entry("TV Movie", "10770"),
+            Map.entry("Thriller", "53"),
+            Map.entry("War", "10752"),
+            Map.entry("Western", "37")
     );
 
     // Searches for a movie based on a given string.
@@ -71,6 +86,12 @@ public class MovieService {
         return gson.fromJson(response, Movie.class);
     }
 
+    /**
+     * Sends HTTP request to API discover page.
+     * @param filters Filters selected by user.
+     * @param page The page of results the API returns.
+     * @return Returns a list of movie objects as a result of the API call.
+     */
     public List<Movie> discoverMovies(Map<String, String> filters, int page) {
         String queryParams = filters.entrySet().stream()
                 .map(entry -> "&" + entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8))
@@ -83,10 +104,20 @@ public class MovieService {
         return movieResponse != null ? movieResponse.getResults() : new ArrayList<>();
     }
 
+    /**
+     * Gets the genre ID of a movie from a predefined map of genres.
+     * @param genreName The name of the genre.
+     * @return Returns the genre ID of a movie.
+     */
     public String getGenreId(String genreName) {
         return GENRE_MAP.getOrDefault(genreName, "");
     }
 
+    /**
+     * Gets the MPAA rating of a movie.
+     * @param movieId The movie's ID.
+     * @return Returns the MPAA rating.
+     */
     public String getCertificationByMovieId(int movieId) {
         String endpoint = "movie/" + movieId + "/release_dates";
         String queryParameters = ""; // No additional query parameters
@@ -118,26 +149,29 @@ public class MovieService {
         return "N/A"; // Return "N/A" if no certification is found
     }
 
+    /**
+     * Gets a list of streaming providers and their logos.
+     * @param movieId The movie's ID.
+     * @return Returns the list of streaming provider's logos.
+     */
     public List<String> getProviderLogos(int movieId) {
         String endpoint = "movie/" + movieId + "/watch/providers";
         String queryParameters = "";
         int page = 1;
 
+        // Send HTTP request.
         String jsonResponse = apiClient.sendRequestByID(endpoint, queryParameters, page);
 
         List<String> logoUrls = new ArrayList<>();
 
+        // Parse json response.
         if (jsonResponse != null) {
             try {
-                // Debugging: Print the raw response to check its structure
-                System.out.println("API Response: " + jsonResponse);
-
                 JsonObject rootObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
                 if (rootObject.has("results")) {
                     JsonObject results = rootObject.getAsJsonObject("results");
 
-                    // Replace "US" with your target country code
-                    String targetCountry = "US"; // Change to match your desired country
+                    String targetCountry = "US";
                     if (results.has(targetCountry)) {
                         JsonObject countryObject = results.getAsJsonObject(targetCountry);
 
@@ -179,12 +213,17 @@ public class MovieService {
         return logoUrls;
     }
 
+    /**
+     * Gets a list of recommended movies based on a given movie.
+     * @param movieId The given movie's ID.
+     * @return Returns a list of recommended movies.
+     */
     public List<Movie> getRecommendedMovies(int movieId) {
         String endpoint = "movie/" + movieId + "/recommendations";
         String queryParameters = "";
         int page = 1;
 
-        // Make the API request
+        // Send HTTP request
         String jsonResponse = apiClient.sendRequestByID(endpoint, queryParameters, page);
 
         // Initialize the list to hold recommended movies
@@ -212,13 +251,13 @@ public class MovieService {
                     movie.setPopularity(movieObject.get("popularity").getAsFloat());
                     movie.setRuntime(movieObject.has("runtime") && !movieObject.get("runtime").isJsonNull()
                             ? movieObject.get("runtime").getAsInt()
-                            : 0);  // Default value 0 if runtime is missing or null
+                            : 0);
                     movie.setRevenue(movieObject.has("revenue") && !movieObject.get("revenue").isJsonNull()
                             ? movieObject.get("venue").getAsDouble()
-                            : 0);  // Default value 0 if runtime is missing or null
+                            : 0);
                     movie.setBudget(movieObject.has("budget") && !movieObject.get("budget").isJsonNull()
                             ? movieObject.get("budget").getAsDouble()
-                            : 0);  // Default value 0 if runtime is missing or null
+                            : 0);
 
 
                     // Add the movie to the recommended movies list

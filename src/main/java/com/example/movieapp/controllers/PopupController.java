@@ -32,8 +32,6 @@ public class PopupController {
     @FXML
     public Label title;
     @FXML
-    public Button recommend;
-    @FXML
     public Label mpaarating;
     @FXML
     public Label releasedate;

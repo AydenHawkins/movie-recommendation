@@ -134,7 +134,7 @@ public class RecommendationController {
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);
 
-            // Add click listener for movie details
+            // Initiate popup when a movie is clicked.
             movieBox.setOnMouseClicked(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movieapp/popup.fxml"));

@@ -54,8 +54,32 @@ public class DiscoverController {
     private static final String LIST_SCENE_PATH = "/com/example/movieapp/list.fxml";
     private int currentPage = 1;
     private Map<String, String> currentFilters = new HashMap<>();
+    private static final Map<String, String> GENRE_MAP = Map.ofEntries(
+            Map.entry("Action", "28"),
+            Map.entry("Adventure", "12"),
+            Map.entry("Animation", "16"),
+            Map.entry("Comedy", "35"),
+            Map.entry("Crime", "80"),
+            Map.entry("Documentary", "99"),
+            Map.entry("Drama", "18"),
+            Map.entry("Family", "10751"),
+            Map.entry("Fantasy", "14"),
+            Map.entry("History", "36"),
+            Map.entry("Horror", "27"),
+            Map.entry("Music", "10402"),
+            Map.entry("Mystery", "9648"),
+            Map.entry("Romance", "10749"),
+            Map.entry("Science Fiction", "878"),
+            Map.entry("TV Movie", "10770"),
+            Map.entry("Thriller", "53"),
+            Map.entry("War", "10752"),
+            Map.entry("Western", "37")
+    );
 
 
+    /**
+     * Initializes window with filters and watch list options.
+     */
     @FXML
     public void initialize() {
         //automatically loads popular movies when the scene is initiated
@@ -63,24 +87,38 @@ public class DiscoverController {
         watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
         watchListChoiceBox.setValue("Watch Lists");
         watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
-        genreComboBox.getItems().addAll("Action", "Comedy", "Drama", "Horror", "Science Fiction");
+        genreComboBox.getItems().addAll(GENRE_MAP.keySet());
     }
 
+    /**
+     * Loads popular movies by default.
+     */
     private void loadDefaultMovies() {
         updateResults("", null);
     }
 
-    //handling buttons to switch scenes
+    /**
+     * Handles switching to search scene.
+     * @throws IOException
+     */
     @FXML
     public void handleSearchSceneButton() throws IOException {
         SceneManager.switchScene(SEARCH_SCENE_PATH);
     }
 
+    /**
+     * Handles switching to discover scene.
+     * @throws IOException
+     */
     @FXML
     public void handleDiscoverSceneButton() throws IOException {
         SceneManager.switchScene(DISCOVER_SCENE_PATH);
     }
 
+    /**
+     * Handles applying movie filters.
+     * @throws IOException
+     */
     @FXML
     public void handleApplyFiltersButton() throws IOException {
         applyFilters();
@@ -165,7 +203,7 @@ public class DiscoverController {
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);
 
-            // Add click listener for movie details
+            // Initiate popup window when a movie is clicked.
             movieBox.setOnMouseClicked(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movieapp/popup.fxml"));

@@ -13,9 +13,13 @@ import java.util.Objects;
  */
 public class SceneManager {
     private static Stage primaryStage;
+
     //listTable references the table that should be referenced when loading the List scene
     //Kept in SceneManager so it doesn't disappear when scenes are swapped
+
     private static String listTable;
+
+    // Current movie ID being looked at. Used when recommending movies.
     private static int currentMovie;
 
     public static void setPrimaryStage(Stage stage) {
@@ -54,6 +58,7 @@ public class SceneManager {
         primaryStage.setMaxWidth(screenWidth);
         primaryStage.setMaxHeight(screenHeight);
 
+        // Ensures scene is remaximized upon switching scenes.
         primaryStage.setScene(scene);
         primaryStage.setMaximized(false);
         primaryStage.setMaximized(true);

@@ -1,3 +1,7 @@
+/**
+ * MOVIE SERVICE APPLICATION
+ * Authors: Connor Harmon, David Hawkins, Dylan Moorefield, Brooklyn Jackson, Thomas Yow
+ */
 package com.example.movieapp;
 
 import javafx.application.Application;
