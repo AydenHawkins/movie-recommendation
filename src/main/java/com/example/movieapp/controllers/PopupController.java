@@ -1,8 +1,11 @@
 package com.example.movieapp.controllers;
 
+import com.example.movieapp.SceneManager;
 import com.example.movieapp.models.Movie;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import com.example.movieapp.database.Database;
+import javafx.stage.Stage;
 
 /**Controller class for the pop-up window
  * pops up when a user clicks on a movie in another scene to give more details about it
@@ -62,10 +66,12 @@ public class PopupController {
     public ImageView providerlogo3;
 
     private Movie cur_movie;
+    private Stage popUpStage;
 
-    public void showMoviePopup(Movie movie) {
+    public void showMoviePopup(Movie movie, Stage popUpStage) {
         // set movie instance variable
         this.cur_movie = movie;
+        this.popUpStage = popUpStage;
 
         // set poster image
         poster.setImage(new Image("https://image.tmdb.org/t/p/w500" + movie.getPosterPath()));
@@ -176,6 +182,16 @@ public class PopupController {
             Database.insertWatchList(cur_movie.getId());
             // change button image
             towatch_image.setImage(new Image(getClass().getResource("/images/ONWATCHLIST.png").toString()));
+        }
+    }
+
+    @FXML
+    public void getRecommendations(ActionEvent event) {
+        try {
+            SceneManager.switchScene("/com/example/movieapp/recommendation.fxml");
+            popUpStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

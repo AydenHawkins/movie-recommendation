@@ -229,7 +229,6 @@ public class ListController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movieapp/popup.fxml"));
                     Parent root = loader.load();
                     PopupController popupController = loader.getController();
-                    popupController.showMoviePopup(movie);
 
                     Scene popupScene = new Scene(root);
                     Stage popupStage = new Stage();
@@ -239,6 +238,8 @@ public class ListController {
                     popupStage.setResizable(false);
                     popupStage.setMaximized(false);
                     popupStage.setIconified(false);
+                    popupController.showMoviePopup(movie, popupStage);
+
                     popupStage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
