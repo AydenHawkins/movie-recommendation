@@ -165,7 +165,7 @@ public class MovieService {
                     System.out.println("'results' key not found in API response.");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         } else {
             System.out.println("API response is null.");

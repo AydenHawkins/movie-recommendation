@@ -219,7 +219,7 @@ public class PopupController {
             SceneManager.switchScene("/com/example/movieapp/recommendation.fxml");
             popUpStage.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

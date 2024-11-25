@@ -242,7 +242,7 @@ public class ListController {
                     popupStage.show();
                     popupController.setProviderLogos(movie.getId());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             });
 
@@ -281,8 +281,6 @@ public class ListController {
                 System.out.println("Invalid year: " + yearTextField.getText());
             }
         }
-
-        System.out.println("Filters after application: " + currentFilters);
 
         // Update the UI with filtered results
         updateResults(SceneManager.getListTable(), currentFilters);
