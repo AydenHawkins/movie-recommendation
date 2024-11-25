@@ -13,6 +13,8 @@ import java.util.Objects;
  */
 public class SceneManager {
     private static Stage primaryStage;
+    //listTable references the table that should be referenced when loading the List scene
+    //Kept in SceneManager so it doesn't disappear when scenes are swapped
     private static String listTable;
 
     public static void setPrimaryStage(Stage stage) {
@@ -27,6 +29,11 @@ public class SceneManager {
         SceneManager.listTable = listTable;
     }
 
+    /**Contains the logic for loading and switching to a given scene
+     *
+     * @param fxmlPath A path to a fxml file to load
+     * @throws IOException If the given file cannot be found
+     */
     public static void switchScene(String fxmlPath) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(SceneManager.class.getResource(fxmlPath)));
         Scene scene = new Scene(root);

@@ -58,6 +58,7 @@ public class DiscoverController {
 
     @FXML
     public void initialize() {
+        //automatically loads popular movies when the scene is initiated
         loadDefaultMovies();
         watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
         watchListChoiceBox.setValue("Watch Lists");
@@ -69,6 +70,7 @@ public class DiscoverController {
         updateResults("", null);
     }
 
+    //handling buttons to switch scenes
     @FXML
     public void handleSearchSceneButton() throws IOException {
         SceneManager.switchScene(SEARCH_SCENE_PATH);
@@ -84,6 +86,10 @@ public class DiscoverController {
         applyFilters();
     }
 
+    /**Handles switching to the List scene based on the selection picked in the list dropdown
+     *
+     * @param selectedList the option of the dropdown selected
+     */
     public void handleWatchListSelectionChange(String selectedList) {
         try {
             switch (selectedList) {
@@ -105,6 +111,10 @@ public class DiscoverController {
         }
     }
 
+    /**Updates results on the page and displays them.
+     * @param query The query to base the API call on
+     * @param filters The filters to apply to the list of movies before displaying
+     */
     private void updateResults(String query, Map<String, String> filters) {
         // Clear previous results
         resultsGrid.getChildren().clear();
@@ -192,6 +202,9 @@ public class DiscoverController {
         nextPageButton.setDisable(movies.size() < 20);
     }
 
+    /**Takes the user input when interacting with the filters and applies them to the list of movies
+     *
+     */
     @FXML
     public void applyFilters() {
         // Collect user-selected filters

@@ -73,6 +73,7 @@ public class ListController {
         watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
         genreComboBox.getItems().addAll("Action", "Comedy", "Drama", "Horror", "Science Fiction");
 
+        //automatically displays results based on what the user clicked on in the list drop down
         updateResults(SceneManager.getListTable(), currentFilters);
     }
 
@@ -86,6 +87,10 @@ public class ListController {
         SceneManager.switchScene(DISCOVER_SCENE_PATH);
     }
 
+    /**Handles switching to the List scene based on the selection picked in the list dropdown
+     *
+     * @param selectedList the option of the dropdown selected
+     */
     @FXML
     public void handleWatchListSelectionChange(String selectedList) {
         try {
@@ -113,6 +118,11 @@ public class ListController {
         applyFilters();
     }
 
+    /**updates results on screen based on the given database and filters
+     *
+     * @param database the list of movies to pull from in movieuserdata.db
+     * @param filters the filters to apply to the list of movies before displaying
+     */
     private void updateResults(String database, Map<String, String> filters) {
         // Clear previous results
         resultsGrid.getChildren().clear();

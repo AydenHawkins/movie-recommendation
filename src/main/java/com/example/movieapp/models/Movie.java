@@ -39,6 +39,10 @@ public class Movie {
         return String.format(title + " (" + releaseDate + ") - Popularity: " + popularity);
     }
 
+    /**returns the release date in a MM DD, YYYY format
+     *
+     * @return A string of the formatted release date
+     */
     public String getFormattedReleaseDate() {
         if (releaseDate == null || releaseDate.isEmpty()) {
             return "Unknown Release Date";

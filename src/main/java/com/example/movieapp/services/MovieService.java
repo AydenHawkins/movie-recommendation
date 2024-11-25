@@ -56,6 +56,11 @@ public class MovieService {
         return movieResponse != null ? movieResponse.getResults() : new ArrayList<>();
     }
 
+    /**Takes a movie ID and returns a Movie object from the result of the API call
+     *
+     * @param movieID the ID of the movie to search for
+     * @return The movie object of the corrosponding ID
+     */
     public static Movie getMovieByID(String movieID) {
         String encodedQuery = URLEncoder.encode(movieID, StandardCharsets.UTF_8);
 

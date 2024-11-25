@@ -73,6 +73,10 @@ public class SearchController {
         SceneManager.switchScene(DISCOVER_SCENE_PATH);
     }
 
+    /**Handles switching to the List scene based on the selection picked in the list dropdown
+     *
+     * @param selectedList the option of the dropdown selected
+     */
     public void handleWatchListSelectionChange(String selectedList) {
         try {
             switch (selectedList) {
@@ -104,6 +108,10 @@ public class SearchController {
         }
     }
 
+    /**Updates the list of movies on screen based on the given query
+     *
+     * @param query the name of the movie to search for in the API
+     */
     private void updateResults(String query) {
         // Clear previous results
         resultsGrid.getChildren().clear();
