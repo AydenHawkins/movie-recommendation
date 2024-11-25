@@ -35,10 +35,6 @@ public class RecommendationController {
     @FXML
     public Button searchSceneButton;
     @FXML
-    public ComboBox genreComboBox;
-    @FXML
-    public TextField yearTextField;
-    @FXML
     private GridPane resultsGrid;
     @FXML
     private Button prevPageButton;
@@ -53,14 +49,10 @@ public class RecommendationController {
 
     @FXML
     public void initialize() {
-        loadDefaultMovies();
+        updateResults(SceneManager.getCurrentMovie());
         watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
         watchListChoiceBox.setValue("Watch Lists");
         watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
-    }
-
-    private void loadDefaultMovies() {
-        updateResults("");
     }
 
     @FXML
@@ -94,12 +86,12 @@ public class RecommendationController {
         }
     }
 
-    private void updateResults(String query) {
+    private void updateResults(int query) {
         // Clear previous results
         resultsGrid.getChildren().clear();
 
         // Get movie data
-        List<Movie> movies = movieService.getPopularMovies(query, currentPage);
+        List<Movie> movies = movieService.getRecommendedMovies(query);
 
         int row = 0;
         int col = 0;
@@ -185,7 +177,7 @@ public class RecommendationController {
     @FXML
     private void handleNextPage() {
         currentPage++;
-        updateResults("");
+        updateResults(SceneManager.getCurrentMovie());
     }
 
     // Called when the previous page button is clicked
@@ -193,7 +185,7 @@ public class RecommendationController {
     private void handlePrevPage() {
         if (currentPage > 1) {
             currentPage--;
-            updateResults("");
+            updateResults(SceneManager.getCurrentMovie());
         }
     }
 

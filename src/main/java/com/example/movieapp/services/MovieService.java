@@ -179,5 +179,60 @@ public class MovieService {
         return logoUrls;
     }
 
+    public List<Movie> getRecommendedMovies(int movieId) {
+        String endpoint = "movie/" + movieId + "/recommendations";
+        String queryParameters = "";
+        int page = 1;
+
+        // Make the API request
+        String jsonResponse = apiClient.sendRequestByID(endpoint, queryParameters, page);
+
+        // Initialize the list to hold recommended movies
+        List<Movie> recommendedMovies = new ArrayList<>();
+
+        // Check if the API response is not null
+        if (jsonResponse != null) {
+            try {
+                // Parse the JSON response
+                JsonObject rootObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+                JsonArray results = rootObject.getAsJsonArray("results");
+
+                // Loop through the results and convert each movie into a Movie object
+                for (JsonElement element : results) {
+                    JsonObject movieObject = element.getAsJsonObject();
+                    Movie movie = new Movie();
+
+                    // Set the movie details
+                    movie.setId(movieObject.get("id").getAsInt());
+                    movie.setTitle(movieObject.get("title").getAsString());
+                    movie.setReleaseDate(movieObject.get("release_date").getAsString());
+                    movie.setOverview(movieObject.get("overview").getAsString());
+                    movie.setPosterPath("https://image.tmdb.org/t/p/w500" + movieObject.get("poster_path").getAsString());
+                    movie.setVoteAverage(movieObject.get("vote_average").getAsFloat());
+                    movie.setPopularity(movieObject.get("popularity").getAsFloat());
+                    movie.setRuntime(movieObject.has("runtime") && !movieObject.get("runtime").isJsonNull()
+                            ? movieObject.get("runtime").getAsInt()
+                            : 0);  // Default value 0 if runtime is missing or null
+                    movie.setRevenue(movieObject.has("revenue") && !movieObject.get("revenue").isJsonNull()
+                            ? movieObject.get("venue").getAsDouble()
+                            : 0);  // Default value 0 if runtime is missing or null
+                    movie.setBudget(movieObject.has("budget") && !movieObject.get("budget").isJsonNull()
+                            ? movieObject.get("budget").getAsDouble()
+                            : 0);  // Default value 0 if runtime is missing or null
+
+
+                    // Add the movie to the recommended movies list
+                    recommendedMovies.add(movie);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Return the list of recommended movies
+        System.out.print(recommendedMovies);
+        return recommendedMovies;
+    }
+
 
 }

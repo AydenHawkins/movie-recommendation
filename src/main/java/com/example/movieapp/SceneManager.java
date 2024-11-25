@@ -16,6 +16,7 @@ public class SceneManager {
     //listTable references the table that should be referenced when loading the List scene
     //Kept in SceneManager so it doesn't disappear when scenes are swapped
     private static String listTable;
+    private static int currentMovie;
 
     public static void setPrimaryStage(Stage stage) {
         primaryStage = stage;
@@ -27,6 +28,12 @@ public class SceneManager {
 
     public static void setListTable(String listTable) {
         SceneManager.listTable = listTable;
+    }
+
+    public static int getCurrentMovie() { return currentMovie;}
+
+    public static void setCurrentMovie(int currentMovie) {
+        SceneManager.currentMovie = currentMovie;
     }
 
     /**Contains the logic for loading and switching to a given scene

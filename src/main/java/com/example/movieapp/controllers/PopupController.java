@@ -26,6 +26,8 @@ public class PopupController {
     @FXML
     public GridPane gridPane;
     @FXML
+    public Button recommend;
+    @FXML
     private ImageView poster;
     @FXML
     public Label title;
@@ -220,6 +222,7 @@ public class PopupController {
     @FXML
     public void getRecommendations(ActionEvent event) {
         try {
+            SceneManager.setCurrentMovie(cur_movie.getId());
             SceneManager.switchScene("/com/example/movieapp/recommendation.fxml");
             popUpStage.close();
         } catch (IOException e) {
