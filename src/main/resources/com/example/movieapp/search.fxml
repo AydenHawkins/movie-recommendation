@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.SearchController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.SearchController">
 
     <!-- Top bar with Search, Discover buttons, and ChoiceBox -->
     <HBox alignment="TOP_RIGHT" layoutX="778.4" layoutY="45.0" prefHeight="26.0" prefWidth="272.0" spacing="10.0" AnchorPane.leftAnchor="778.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="45.0">
@@ -29,7 +29,7 @@
     </HBox>
 
     <!-- Scrollable GridPane for movie results -->
-    <ScrollPane fx:id="scrollPane" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="120.0">
+    <ScrollPane fx:id="scrollPane" style="-fx-border-color: black;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="120.0">
         <GridPane fx:id="resultsGrid" hgap="10.0" vgap="10.0" />
     </ScrollPane>
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.DiscoverController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.DiscoverController">
     <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="15.0" prefHeight="36.0" prefWidth="622.0">
         <Label text="Genre:">
            <HBox.margin>
@@ -43,7 +43,7 @@
     </HBox>
 
     <!-- Scrollable GridPane for movie results -->
-    <ScrollPane fx:id="scrollPane" layoutX="20.0" layoutY="80.0" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
+    <ScrollPane fx:id="scrollPane" layoutX="20.0" layoutY="80.0" style="-fx-background-color: pink; -fx-border-color: black;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
         <GridPane fx:id="resultsGrid" hgap="10.0" vgap="10.0" />
     </ScrollPane>
 
