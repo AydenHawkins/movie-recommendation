@@ -148,11 +148,8 @@ public class ListController {
                             // Parse the selected genre ID from the filter value
                             Integer selectedGenreId = Integer.parseInt(value);
 
-                            System.out.println("Selected Genre ID: " + selectedGenreId);  // Log selected genre ID
-
                             // Check if the movie's genres contain the selected genre ID
                             for (Genre genre : movie.getGenres()) {
-                                System.out.println("Movie Genre ID: " + genre.getId());  // Log each genre ID in the movie
 
                                 if (genre.getId() == selectedGenreId) {
                                     genreMatch = true;
