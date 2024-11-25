@@ -24,6 +24,9 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.List;
 
+/**The controller for the search window.
+ * Allows the user to search through movies with a name
+ */
 public class SearchController {
 
     @FXML

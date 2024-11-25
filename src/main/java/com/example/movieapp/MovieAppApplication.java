@@ -3,6 +3,9 @@ package com.example.movieapp;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**Application class to start the Movie app
+ *
+ */
 public class MovieAppApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {

@@ -1,5 +1,8 @@
 package com.example.movieapp.models;
 
+/**Class for Genre objects
+ *
+ */
 public class Genre {
     private int id;
     private String name;

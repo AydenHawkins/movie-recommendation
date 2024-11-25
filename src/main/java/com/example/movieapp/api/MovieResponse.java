@@ -4,6 +4,9 @@ import com.example.movieapp.models.Movie;
 
 import java.util.List;
 
+/**Object to store all responses from the API for a given movie
+ *
+ */
 public class MovieResponse {
     private int page;
     private List<Movie> results;

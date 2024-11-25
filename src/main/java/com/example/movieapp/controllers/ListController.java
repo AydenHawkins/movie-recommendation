@@ -27,6 +27,9 @@ import java.util.Map;
 
 import com.example.movieapp.database.Database;
 
+/**Controller for the window that handles looking through the user's lists
+ *
+ */
 public class ListController {
     @FXML
     public AnchorPane anchorPane;

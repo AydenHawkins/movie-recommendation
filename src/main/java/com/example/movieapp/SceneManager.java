@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**Class to handle loading and showing scenes and swapping between them
+ *
+ */
 public class SceneManager {
     private static Stage primaryStage;
     private static String listTable;

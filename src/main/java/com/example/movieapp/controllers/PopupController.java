@@ -15,6 +15,9 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import com.example.movieapp.database.Database;
 
+/**Controller class for the pop-up window
+ * pops up when a user clicks on a movie in another scene to give more details about it
+ */
 public class PopupController {
 
     @FXML

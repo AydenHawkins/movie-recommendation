@@ -5,6 +5,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**Handles all interactions with the TMDB API
+ *
+ */
 public class ApiClient {
     private static final String API_URL = "https://api.themoviedb.org/3";
     private static final String API_KEY = "2944647b92af0a01d0547271ecdf9c59";

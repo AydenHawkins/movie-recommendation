@@ -12,6 +12,9 @@ import java.net.URLEncoder;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**Class with methods to search for movies with the TMDB API with different parameters and requirements
+ *
+ */
 public class MovieService {
     private static final ApiClient apiClient = new ApiClient();
     private static final Gson gson = new Gson();

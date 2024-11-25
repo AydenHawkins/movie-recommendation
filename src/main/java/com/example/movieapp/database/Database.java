@@ -2,6 +2,9 @@ package com.example.movieapp.database;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**Class to handle all interactions with movieuserdata.db
+ *
+ */
 public class Database {
 
     private static final String url = "jdbc:sqlite:src/main/java/com/example/movieapp/database/movieuserdata.db";

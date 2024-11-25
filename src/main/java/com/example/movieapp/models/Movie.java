@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**Class for movie objects
+ *
+ */
 public class Movie {
     // Instance variables
     @SerializedName("title")

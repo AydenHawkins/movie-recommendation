@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**Controller class for the discover window
+ * allows the user to filter most popular movies
+ */
 public class DiscoverController {
     @FXML
     public AnchorPane anchorPane;
