@@ -1,6 +1,7 @@
 package com.example.movieapp.controllers;
 
 import com.example.movieapp.SceneManager;
+import com.example.movieapp.models.Genre;
 import com.example.movieapp.models.Movie;
 import com.example.movieapp.services.MovieService;
 import javafx.fxml.FXML;
@@ -49,6 +50,18 @@ public class ListController {
     private static final String DISCOVER_SCENE_PATH = "/com/example/movieapp/discover.fxml";
     private static final String LIST_SCENE_PATH = "/com/example/movieapp/list.fxml";
     private Map<String, String> currentFilters = new HashMap<>();
+
+    private Map<String, Integer> genreNameToIdMap = new HashMap<>();
+
+    private void initializeGenreMapping() {
+        // Mapping of genre names to genre IDs (example)
+        genreNameToIdMap.put("Action", 28);
+        genreNameToIdMap.put("Comedy", 35);
+        genreNameToIdMap.put("Drama", 18);
+        genreNameToIdMap.put("Horror", 27);
+        genreNameToIdMap.put("Science Fiction", 878);
+    }
+
 
     @FXML
     public void initialize() {
@@ -120,29 +133,49 @@ public class ListController {
         List<Movie> filteredMovies = new ArrayList<>(movies);
 
         if (!filters.isEmpty()) {
-            for (Movie movie : filteredMovies) {
+            filteredMovies.removeIf(movie -> {
                 for (Map.Entry<String, String> entry : filters.entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();
 
                     switch (key) {
                         case "with_genres":
-                            if (!movie.getGenres().contains(value)) {
-                                movies.remove(movie);
+                            boolean genreMatch = false;
+
+                            // Parse the selected genre ID from the filter value
+                            Integer selectedGenreId = Integer.parseInt(value);
+
+                            System.out.println("Selected Genre ID: " + selectedGenreId);  // Log selected genre ID
+
+                            // Check if the movie's genres contain the selected genre ID
+                            for (Genre genre : movie.getGenres()) {
+                                System.out.println("Movie Genre ID: " + genre.getId());  // Log each genre ID in the movie
+
+                                if (genre.getId() == selectedGenreId) {
+                                    genreMatch = true;
+                                    break;
+                                }
+                            }
+
+                            // If no matching genre, remove the movie
+                            if (!genreMatch) {
+                                return true; // Remove this movie from the filtered list
                             }
                             break;
+
                         case "primary_release_year":
                             if (!movie.getReleaseDate().substring(0, 4).equals(value)) {
-                                movies.remove(movie);
+                                return true; // Remove this movie from the filtered list
                             }
                             break;
                     }
                 }
-            }
+                return false; // Keep this movie in the filtered list
+            });
         }
 
         // Add movie posters, titles, and release dates to the grid
-        for (Movie movie : movies) {
+        for (Movie movie : filteredMovies) {
             // Create ImageView for poster
             ImageView imageView = new ImageView(new Image("https://image.tmdb.org/t/p/w500" + movie.getPosterPath()));
             imageView.setFitWidth(275);
@@ -219,8 +252,13 @@ public class ListController {
         currentFilters.clear();
 
         if (genreComboBox.getValue() != null) {
-            currentFilters.put("with_genres", movieService.getGenreId(genreComboBox.getValue().toString()));
+            String genreName = genreComboBox.getValue().toString();
+            String genreId = movieService.getGenreId(genreName);
+            System.out.println("Selected Genre: " + genreName + " -> Genre ID: " + genreId);
+
+            currentFilters.put("with_genres", genreId);
         }
+
         if (!yearTextField.getText().isEmpty()) {
             try {
                 int year = Integer.parseInt(yearTextField.getText());
@@ -232,7 +270,12 @@ public class ListController {
                 System.out.println("Invalid year: " + yearTextField.getText());
             }
         }
-        // Update the UI
+
+        System.out.println("Filters after application: " + currentFilters);
+
+        // Update the UI with filtered results
         updateResults(SceneManager.getListTable(), currentFilters);
     }
+
+
 }
