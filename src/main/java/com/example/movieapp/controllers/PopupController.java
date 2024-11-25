@@ -44,10 +44,6 @@ public class PopupController {
     @FXML
     public Label synopsis;
     @FXML
-    public Label director;
-    @FXML
-    public Label cast;
-    @FXML
     public Button like_button;
     @FXML
     public Button watched_button;
@@ -65,6 +61,8 @@ public class PopupController {
     public ImageView providerlogo2;
     @FXML
     public ImageView providerlogo3;
+    @FXML
+    public Label streaming;
 
     private Movie cur_movie;
     private final MovieService movieService = new MovieService();
@@ -90,14 +88,14 @@ public class PopupController {
         releasedate.setText(movie.getReleaseDate());
 
         // set user rating
-        userscore.setText(String.valueOf(movie.getVoteAverage()));
+        userscore.setText(String.format("%.0f", movie.getVoteAverage() * 10) + "%");
 
         // set overview
         synopsis.setText(movie.getOverview());
 
         // set runtime
-        int hours = movie.getRuntime() % 60;
-        int minutes = movie.getRuntime() / 60;
+        int hours = movie.getRuntime() / 60;
+        int minutes = movie.getRuntime() % 60;
         runtime.setText(String.format("%dh %dm", hours, minutes));
 
         // set genres
@@ -113,6 +111,7 @@ public class PopupController {
         }
         genres.setText(sb.toString());
 
+        // set certification
         String certification = movieService.getCertificationByMovieId(movie.getId());
         mpaarating.setText(certification.equals("N/A") ? "Unrated" : certification);
 
@@ -158,6 +157,11 @@ public class PopupController {
                 // Clear the ImageView if no logo is available
                 logoViews[i].setImage(null);
             }
+        }
+
+        // if not on streaming, get rid of "streaming" label
+        if (logoViews[0].getImage() == null) {
+            streaming.setText("");
         }
     }
 

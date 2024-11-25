@@ -58,22 +58,13 @@
             </padding>
         </Label>
         <Label fx:id="runtime" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="78.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-        <Label fx:id="genres" prefHeight="28.0" prefWidth="235.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-        <Label prefHeight="17.0" prefWidth="165.0" text="User Score:" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-        <Label fx:id="userscore" prefHeight="27.0" prefWidth="61.0" style="-fx-text-alignment: center;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <Label fx:id="synopsis" alignment="TOP_LEFT" prefHeight="126.0" prefWidth="445.0" wrapText="true" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" GridPane.rowSpan="3" />
-        <Label alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="70.0" text="Director" GridPane.columnIndex="3" GridPane.rowIndex="8">
-            <font>
-                <Font name="System Bold" size="13.0" />
-            </font>
-        </Label>
-        <Label fx:id="director" prefHeight="31.0" prefWidth="177.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="9" />
-        <Label alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="80.0" text="Starring" GridPane.columnIndex="5" GridPane.rowIndex="8">
-            <font>
-                <Font name="System Bold" size="13.0" />
-            </font>
-        </Label>
-        <Label fx:id="cast" alignment="TOP_LEFT" prefHeight="57.0" prefWidth="320.0" wrapText="true" GridPane.columnIndex="5" GridPane.columnSpan="4" GridPane.rowIndex="9" GridPane.rowSpan="2" />
+        <Label fx:id="genres" prefHeight="28.0" prefWidth="330.0" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Label prefHeight="22.0" prefWidth="70.0" text="User Score:" GridPane.columnIndex="3" GridPane.rowIndex="4">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="userscore" prefHeight="38.0" prefWidth="61.0" style="-fx-text-alignment: center;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Label fx:id="synopsis" alignment="TOP_LEFT" prefHeight="108.0" prefWidth="445.0" wrapText="true" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" GridPane.rowSpan="4" />
         <Button fx:id="like_button" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#changeLikedList" onMouseEntered="#cursorToHand" onMouseExited="#cursorToDefault" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: transparent;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12" GridPane.vgrow="ALWAYS">
             <graphic>
                 <ImageView fx:id="like_image" fitHeight="50.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
@@ -89,14 +80,14 @@
                 <ImageView fx:id="towatch_image" fitHeight="50.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
             </graphic>
         </Button>
-        <Label alignment="CENTER" prefHeight="17.0" prefWidth="83.0" text="Streaming" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="2">
+        <Label fx:id="streaming" alignment="CENTER" prefHeight="17.0" prefWidth="83.0" text="Streaming" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="9">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-        <ImageView fx:id="providerlogo3" fitHeight="30.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-        <ImageView fx:id="providerlogo1" fitHeight="30.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-        <ImageView fx:id="providerlogo2" fitHeight="30.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+        <ImageView fx:id="providerlogo3" fitHeight="30.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+        <ImageView fx:id="providerlogo1" fitHeight="30.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+        <ImageView fx:id="providerlogo2" fitHeight="30.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
       <Button fx:id="recommend" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#getRecommendations" prefHeight="3.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <cursor>
             <Cursor fx:constant="HAND" />
