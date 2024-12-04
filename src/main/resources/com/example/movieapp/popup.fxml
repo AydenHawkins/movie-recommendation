@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.PopupController">
+
+<GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movieapp.controllers.PopupController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="13.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.0" prefWidth="100.0" />
@@ -46,25 +47,26 @@
                 <Insets />
             </GridPane.margin>
         </ImageView>
-        <Label fx:id="title" prefHeight="25.0" prefWidth="460.0" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1">
+        <Label fx:id="title" prefHeight="25.0" prefWidth="460.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1">
             <font>
                 <Font name="Futura Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="mpaarating" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="50.0" style="-fx-border-color: black;" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-        <Label fx:id="releasedate" prefHeight="21.0" prefWidth="97.0" style="-fx-text-alignment: center;" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+        <Label fx:id="mpaarating" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="50.0" style="-fx-border-color: black;" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <Label fx:id="releasedate" prefHeight="21.0" prefWidth="97.0" style="-fx-text-alignment: center;" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
             <padding>
                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </padding>
         </Label>
-        <Label fx:id="runtime" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="78.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-        <Label fx:id="genres" prefHeight="28.0" prefWidth="330.0" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <Label prefHeight="22.0" prefWidth="70.0" text="User Score:" GridPane.columnIndex="3" GridPane.rowIndex="4">
+        <Label fx:id="runtime" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="78.0" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+        <Label fx:id="genres" prefHeight="28.0" prefWidth="330.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Label prefHeight="22.0" prefWidth="70.0" text="User Score:" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="4">
          <font>
             <Font name="System Bold" size="13.0" />
-         </font></Label>
-        <Label fx:id="userscore" prefHeight="38.0" prefWidth="61.0" style="-fx-text-alignment: center;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <Label fx:id="synopsis" alignment="TOP_LEFT" prefHeight="108.0" prefWidth="445.0" wrapText="true" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" GridPane.rowSpan="4" />
+         </font>
+      </Label>
+        <Label fx:id="userscore" prefHeight="38.0" prefWidth="61.0" style="-fx-text-alignment: center;" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Label fx:id="synopsis" alignment="TOP_LEFT" prefHeight="108.0" prefWidth="445.0" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" GridPane.rowSpan="4" />
         <Button fx:id="like_button" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#changeLikedList" onMouseEntered="#cursorToHand" onMouseExited="#cursorToDefault" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: transparent;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12" GridPane.vgrow="ALWAYS">
             <graphic>
                 <ImageView fx:id="like_image" fitHeight="50.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
@@ -80,7 +82,7 @@
                 <ImageView fx:id="towatch_image" fitHeight="50.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
             </graphic>
         </Button>
-        <Label fx:id="streaming" alignment="CENTER" prefHeight="17.0" prefWidth="83.0" text="Streaming" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="9">
+        <Label fx:id="streaming" alignment="CENTER" prefHeight="17.0" prefWidth="83.0" text="Streaming" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="9">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>

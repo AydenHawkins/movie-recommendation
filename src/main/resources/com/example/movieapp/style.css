@@ -1,0 +1,54 @@
+/* General styling for the entire application */
+.root {
+    -fx-background-color: #121212;
+}
+
+/* Button styles */
+.button {
+    -fx-background-color: #424242;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+#watchListComboBox {
+    -fx-background-color: #424242;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+/* ComboBox styling */
+.combo-box {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+}
+
+/* TextField styling */
+.text-field {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+}
+
+/* Label styles */
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ScrollPane styling */
+.scroll-pane {
+    -fx-background: #121212;
+    -fx-border-color: #121212;
+}
+
+/* GridPane styling */
+.grid-pane {
+    -fx-background: #121212;
+    -fx-border-color: #121212;
+}
+
+/* Pagination buttons alignment */
+#prevPageButton, #nextPageButton {
+    -fx-background-color: #424242;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}

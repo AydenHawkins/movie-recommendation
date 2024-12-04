@@ -59,6 +59,7 @@ public class SceneManager {
         primaryStage.setMaxHeight(screenHeight);
 
         // Ensures scene is remaximized upon switching scenes.
+        // scene.getStylesheets().add(SceneManager.class.getResource("dark-theme.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setMaximized(false);
         primaryStage.setMaximized(true);

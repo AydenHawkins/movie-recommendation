@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -32,7 +33,7 @@ public class DiscoverController {
     @FXML
     public ScrollPane scrollPane;
     @FXML
-    public ChoiceBox watchListChoiceBox;
+    public ComboBox watchListComboBox;
     @FXML
     public Button discoverSceneButton;
     @FXML
@@ -84,9 +85,10 @@ public class DiscoverController {
     public void initialize() {
         //automatically loads popular movies when the scene is initiated
         loadDefaultMovies();
-        watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
-        watchListChoiceBox.setValue("Watch Lists");
-        watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
+        watchListComboBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
+        watchListComboBox.setValue("Watch Lists");
+        watchListComboBox.setStyle("-fx-text-fill: white; -fx-background-color: #424242; -fx-border-color: #474545;");
+        watchListComboBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
         genreComboBox.getItems().addAll(GENRE_MAP.keySet());
     }
 
@@ -177,6 +179,7 @@ public class DiscoverController {
             movieTitle.setWrappingWidth(150);
             movieTitle.setTextAlignment(TextAlignment.CENTER);
             movieTitle.setStyle("-fx-font-weight: bold;");
+            movieTitle.setFill(Color.WHITE);
 
             // Wrap the title inside a fixed container
             VBox titleContainer = new VBox(movieTitle);
@@ -186,6 +189,7 @@ public class DiscoverController {
             // Create label for the movie release date
             Text releaseDate = new Text(movie.getFormattedReleaseDate());
             releaseDate.setTextAlignment(TextAlignment.CENTER);
+            releaseDate.setFill(Color.WHITE);
 
             // Wrap the release date in a fixed container
             VBox dateContainer = new VBox(releaseDate);
@@ -198,7 +202,7 @@ public class DiscoverController {
             movieBox.setPrefHeight(450);
             movieBox.setAlignment(Pos.TOP_CENTER);
             movieBox.setSpacing(10);
-            movieBox.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1;");
+            movieBox.setStyle("-fx-background-color: #424242; -fx-padding: 10; -fx-border-radius: 5; -fx-border-color: #474545; -fx-border-width: 1;");
 
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);

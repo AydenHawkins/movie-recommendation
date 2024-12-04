@@ -7,12 +7,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
 import com.example.movieapp.database.Database;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
@@ -73,13 +73,48 @@ public class PopupController {
         showMoviePopup(movie, popUpStage);
     }
 
+    public Image darkenImage(Image posterImage, double darknessFactor) {
+        int width = (int) posterImage.getWidth();
+        int height = (int) posterImage.getHeight();
+
+        WritableImage darkenedImage = new WritableImage(width, height);
+        PixelReader pixelReader = posterImage.getPixelReader();
+        PixelWriter pixelWriter = darkenedImage.getPixelWriter();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color color = pixelReader.getColor(x, y);
+                Color darkenedColor = color.darker().interpolate(Color.BLACK, darknessFactor);
+                pixelWriter.setColor(x, y, darkenedColor);
+            }
+        }
+
+        return darkenedImage;
+    }
+
     public void showMoviePopup(Movie movie, Stage popUpStage) {
         // set movie instance variable
         this.cur_movie = movie;
         this.popUpStage = popUpStage;
 
+        Image posterImage = new Image("https://image.tmdb.org/t/p/w500" + movie.getPosterPath());
+        poster.setImage(posterImage);
+
+        Image darkenedPosterImage = darkenImage(posterImage, 0.7);
+
+        BackgroundImage backgroundImage = new BackgroundImage(
+                darkenedPosterImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(100, 100, true, true, false, true)
+        );
+
+        gridPane.setBackground(new Background(backgroundImage));
+
+
         // set poster image
-        poster.setImage(new Image("https://image.tmdb.org/t/p/w500" + movie.getPosterPath()));
+        poster.setImage(posterImage);
 
         // set title
         title.setText(movie.getTitle());

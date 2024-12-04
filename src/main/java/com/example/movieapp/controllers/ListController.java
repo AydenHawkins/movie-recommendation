@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -38,7 +39,7 @@ public class ListController {
     @FXML
     public Button searchSceneButton;
     @FXML
-    public ChoiceBox watchListChoiceBox;
+    public ComboBox watchListComboBox;
     @FXML
     public Button discoverSceneButton;
     @FXML
@@ -80,9 +81,10 @@ public class ListController {
      */
     @FXML
     public void initialize() {
-        watchListChoiceBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
-        watchListChoiceBox.setValue("Watch Lists");
-        watchListChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
+        watchListComboBox.getItems().addAll("Liked Movies", "To Watch", "Seen");
+        watchListComboBox.setValue("Watch Lists");
+        watchListComboBox.setStyle("-fx-text-fill: white; -fx-background-color: #424242; -fx-border-color: #474545;");
+        watchListComboBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> handleWatchListSelectionChange(newValue.toString()));
         genreComboBox.getItems().addAll(GENRE_MAP.keySet());
 
         //automatically displays results based on what the user clicked on in the list drop down
@@ -220,17 +222,17 @@ public class ListController {
             movieTitle.setWrappingWidth(150);
             movieTitle.setTextAlignment(TextAlignment.CENTER);
             movieTitle.setStyle("-fx-font-weight: bold;");
-            movieTitle.setStyle("-fx-text-alignment: center;");
+            movieTitle.setFill(Color.WHITE);
 
             // Wrap the title inside a fixed container.
             VBox titleContainer = new VBox(movieTitle);
             titleContainer.setPrefHeight(50);
             titleContainer.setAlignment(Pos.CENTER);
-            titleContainer.setStyle("-fx-font-weight: bold;");
 
             // Create label for the movie release date
             Text releaseDate = new Text(movie.getFormattedReleaseDate());
             releaseDate.setTextAlignment(TextAlignment.CENTER);
+            releaseDate.setFill(Color.WHITE);
 
             // Wrap the release date in a fixed container.
             VBox dateContainer = new VBox(releaseDate);
@@ -243,7 +245,7 @@ public class ListController {
             movieBox.setPrefHeight(450);
             movieBox.setAlignment(Pos.TOP_CENTER);
             movieBox.setSpacing(10);
-            movieBox.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1;");
+            movieBox.setStyle("-fx-background-color: #424242; -fx-padding: 10; -fx-border-radius: 5; -fx-border-color: #474545; -fx-border-width: 1;");
 
             // Add components to movieBox
             movieBox.getChildren().addAll(imageView, titleContainer, dateContainer);
